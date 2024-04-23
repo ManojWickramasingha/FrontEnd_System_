@@ -2,7 +2,7 @@ import React from 'react'
 
 const SystemLogsPage = () => {
     return (
-        <div>SystemLogsPage</div>
+        <div className='pageTemplate2'>SystemLogsPage</div>
     )
 }
 
