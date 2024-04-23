@@ -44,14 +44,18 @@ const Header = () => {
                 />
                 {
                     mode == 'user' ? (
-                        <div className='flex justify-center items-center'>
-                            <ul className='flex gap-4 items-center justify-center text-[#e5fafe]'>
-                                <li className='font-semibold cursor-pointer'>Home</li>
-                                <li className='font-semibold cursor-pointer'>Services</li>
-                                <li className='font-semibold cursor-pointer'>About</li>
-                                <li className='font-semibold cursor-pointer'>Contact</li>
-                            </ul>
-                        </div>
+                        isAuthenticated ? (
+                            <div></div>
+                        ) : (
+                            <div className='flex justify-center items-center'>
+                                <ul className='flex gap-4 items-center justify-center text-[#e5fafe]'>
+                                    <li className='font-semibold cursor-pointer'>Home</li>
+                                    <li className='font-semibold cursor-pointer'>Services</li>
+                                    <li className='font-semibold cursor-pointer'>About</li>
+                                    <li className='font-semibold cursor-pointer'>Contact</li>
+                                </ul>
+                            </div>
+                        )
                     ) : (
                         <div className='flex gap-1 justify-between items-center text-[#e5fafe]'>
                             <h1 className='px-1 font-semibold border border-dashed border-green-300 rounded-lg'>
