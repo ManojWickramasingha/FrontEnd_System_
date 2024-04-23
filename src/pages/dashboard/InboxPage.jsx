@@ -2,7 +2,7 @@ import React from 'react'
 
 const InboxPage = () => {
     return (
-        <div>InboxPage</div>
+        <div className='pageTemplate2'>InboxPage</div>
     )
 }
 

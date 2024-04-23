@@ -11,6 +11,12 @@ import MyLogsPage from '../pages/dashboard/MyLogsPage';
 import SendMessagePage from '../pages/dashboard/SendMessagePage';
 import SystemLogsPage from '../pages/dashboard/admin/SystemLogsPage';
 import UserDashboard from '../pages/dashboard/user/UserDashboard';
+import AnalysisPage from '../pages/dashboard/user/Analysis';
+import TransactionPage from '../pages/dashboard/user/Transaction';
+import ReportPage from '../pages/dashboard/user/Report';
+import RemenderPage from '../pages/dashboard/user/Remender';
+import OrganizationPage from '../pages/dashboard/user/Organization';
+import SettingPage from '../pages/dashboard/user/Setting';
 import UsersManagementPage from '../pages/dashboard/admin/UsersManagementPage';
 import HomePage from '../pages/public/HomePage';
 import LoginPage from '../pages/public/LoginPage';
@@ -35,6 +41,12 @@ const GlobalRouter = () => {
                 {/* Protected routes */}
                 <Route element={<AuthGuardForUser />}>
                     <Route path={PATH_DASHBOARD_USER.dashboard} element={<UserDashboard />} />
+                    <Route path={PATH_DASHBOARD_USER.analysis} element={<AnalysisPage />} />
+                    <Route path={PATH_DASHBOARD_USER.transaction} element={<TransactionPage />} />
+                    <Route path={PATH_DASHBOARD_USER.report} element={<ReportPage />} />
+                    <Route path={PATH_DASHBOARD_USER.remender} element={<RemenderPage />} />
+                    <Route path={PATH_DASHBOARD_USER.organization} element={<OrganizationPage />} />
+                    <Route path={PATH_DASHBOARD_USER.setting} element={<SettingPage />} />
                     <Route path={PATH_DASHBOARD_USER.sendMessage} element={<SendMessagePage />} />
                     <Route path={PATH_DASHBOARD_USER.inbox} element={<InboxPage />} />
                     <Route path={PATH_DASHBOARD_USER.myLogs} element={<MyLogsPage />} />

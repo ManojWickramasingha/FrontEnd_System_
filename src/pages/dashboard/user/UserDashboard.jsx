@@ -4,7 +4,7 @@ import Spinner from '../../../components/general/Spinner';
 const UserDashboard = () => {
     return (
         <div className='pageTemplate2'>
-            UserDashboard
+            UserDashboardPage
             {/* <Spinner /> */}
         </div>
     )
