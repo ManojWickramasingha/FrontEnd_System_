@@ -2,7 +2,7 @@ import React from 'react'
 
 const AllMessagesPage = () => {
     return (
-        <div>AllMessagesPage</div>
+        <div className='pageTemplate2'>AllMessagesPage</div>
     )
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 const UsersManagementPage = () => {
     return (
-        <div>UsersManagementPage</div>
+        <div className='pageTemplate2'>UsersManagementPage</div>
     )
 }
 
