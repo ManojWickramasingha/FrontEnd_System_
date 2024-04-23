@@ -6,7 +6,7 @@ const App = () => {
     return (
         <div>
             <GlobalRouter />
-            <Toaster />
+            {/* <Toaster /> */}
         </div>
     )
 }
