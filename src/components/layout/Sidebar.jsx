@@ -26,7 +26,7 @@ const Sidebar = () => {
 
             {
                 user.roles == "Admin" ? (
-                    <div className='flex flex-col items-stretch gap-8'>
+                    <div className='flex flex-col items-stretch gap-6'>
                         <Button
                             label='Users Management'
                             onClick={() => handelClick(PATH_DASHBOARD_ADMIN.usersManagement)}
@@ -65,22 +65,40 @@ const Sidebar = () => {
                         />
                     </div>
                 ) : (
-                    <div className='flex flex-col items-stretch gap-8'>
+                    <div className='flex flex-col items-stretch gap-6'>
                         <Button
-                            label='Send Message'
-                            onClick={() => handelClick(PATH_DASHBOARD_USER.sendMessage)}
+                            label='Analysis'
+                            onClick={() => handelClick(PATH_DASHBOARD_USER.analysis)}
                             type='button'
                             variant='secondary'
                         />
                         <Button
-                            label='Inbox'
-                            onClick={() => handelClick(PATH_DASHBOARD_USER.inbox)}
+                            label='Transaction'
+                            onClick={() => handelClick(PATH_DASHBOARD_USER.transaction)}
                             type='button'
                             variant='secondary'
                         />
                         <Button
-                            label='My Logs'
-                            onClick={() => handelClick(PATH_DASHBOARD_USER.myLogs)}
+                            label='Report'
+                            onClick={() => handelClick(PATH_DASHBOARD_USER.report)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='Remender'
+                            onClick={() => handelClick(PATH_DASHBOARD_USER.remender)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='Organization'
+                            onClick={() => handelClick(PATH_DASHBOARD_USER.organization)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='Setting'
+                            onClick={() => handelClick(PATH_DASHBOARD_USER.setting)}
                             type='button'
                             variant='secondary'
                         />

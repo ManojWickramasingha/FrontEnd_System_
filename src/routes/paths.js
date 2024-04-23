@@ -8,6 +8,12 @@ export const PATH_PUBLIC = {
 
 export const PATH_DASHBOARD_USER = {
     dashboard: '/user/dashboard',
+    analysis: '/user/dashboard/analysis',
+    transaction: '/user/dashboard/transaction',
+    report: '/user/dashboard/report',
+    remender: '/user/dashboard/remender',
+    organization: '/user/dashboard/organization',
+    setting: '/user/dashboard/setting',
     sendMessage: '/user/dashboard/send-message',
     inbox: '/user/dashboard/inbox',
     myLogs: '/user/dashboard/my-logs',
