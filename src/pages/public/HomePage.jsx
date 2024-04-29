@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ScrollToTop from '../../components/general/ScrollToTop'
 import Button from '../../components/general/Button'
 import {BsChevronCompactLeft,BsChevronCompactRight} from 'react-icons/bs'
+import {RxDotFilled} from 'react-icons/rx'
 
 import tracking from '../../assets/tracking.png'
 import saving from '../../assets/saving.png'
@@ -44,14 +45,18 @@ const HomePage = () => {
         setCurrentIndex(nextIndex);
     }
 
+    const goToSlide = (slideIndex) => {
+        setCurrentIndex(slideIndex);
+    }
+
     return (
         <div className='w-full min-h-[calc(100vh-48px)] flex flex-col justify-center items-center mx-auto'>
             <ScrollToTop />
             <div className='pageTemplate5 group'>
                 {/* texture */}
-                <div className='w-2/5 h-full flex flex-col justify-center items-start gap-3'>
-                    <h1 className='text-6xl font-bold'>{slides[currentIndex].main}</h1>
-                    <p className='text-2xl font-semibold'>{slides[currentIndex].sub}</p>
+                <div className='w-2/5 p-2 h-full flex flex-col justify-center items-start gap-3'>
+                    <h1 className='text-6xl font-bold duration-500'>{slides[currentIndex].main}</h1>
+                    <p className='text-2xl font-semibold duration-500'>{slides[currentIndex].sub}</p>
                     <Button
                         label='Details'
                         onClick={() => handelClick()}
@@ -60,7 +65,7 @@ const HomePage = () => {
                     />
                 </div>
                 {/* images */}
-                <div style={{backgroundImage: `url(${slides[currentIndex].url})`}} className='w-[450px] h-[400px] bg-center bg-cover duration-500'></div>
+                <div style={{backgroundImage: `url(${slides[currentIndex].url})`}} className='w-[475px] h-[450px] bg-center bg-cover duration-500'></div>
                 {/* Left Arrow */}
                 <div className='hidden group-hover:block absolute top-[50%] left-10 -translate-x-0 translate-y-[-50%] text-2xl bg-[#f5f5f5] rounded-3xl p-2 cursor-pointer'>
                     <BsChevronCompactLeft size={30} onClick={prevIndex} />
@@ -68,6 +73,15 @@ const HomePage = () => {
                 {/* Right Arrow */}
                 <div className='hidden group-hover:block absolute top-[50%] right-10 -translate-x-0 translate-y-[-50%] text-2xl bg-[#f5f5f5] rounded-3xl p-2 cursor-pointer'>
                     <BsChevronCompactRight size={30} onClick={nextIndex} />
+                </div>
+                <div className='flex absolute top-[90%] justify-center py-2'>
+                    {
+                        slides.map((slides,slideIndex) => (
+                            <div key={slideIndex} onClick={() => goToSlide(slideIndex)} className='text-2xl cursor-pointer'>
+                                <RxDotFilled />
+                            </div>
+                        ))
+                    }
                 </div>
             </div>
             <div className='pageTemplate4'>SERVICES</div>
