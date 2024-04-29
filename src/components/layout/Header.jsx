@@ -4,29 +4,15 @@ import { AiOutlineHome } from 'react-icons/ai';
 import { FiLock, FiUnlock } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { PATH_DASHBOARD_ADMIN, PATH_DASHBOARD_USER, PATH_PUBLIC } from '../../routes/paths';
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { RiAdminFill } from "react-icons/ri";
 import { FaUser } from "react-icons/fa6";
+import ModeContext from '../../auth/mode.context';
 
 const Header = () => {
     const { isAuthenticated, isAuthLoading, user, logout } = useAuth();
     const navigate = useNavigate();
-    const [mode, setMode] = useState(() => {
-        // Check if mode is stored in local storage
-        const storedMode = localStorage.getItem('mode');
-        // Return stored mode if exists, otherwise default to 'user'
-        return storedMode ? storedMode : 'user';
-    });
-
-    // Update local storage when mode changes
-    useEffect(() => {
-        localStorage.setItem('mode', mode);
-    }, [mode]);
-
-    const toggleMode = () => {
-        // Toggle mode between 'user' and 'admin'
-        setMode(preMode => (preMode == 'user' ? 'admin' : 'user'));
-    };
+    const {mode,toggleMode} = useContext(ModeContext);
 
     const userRolesLabelCreator = () => {
         if (user && user.roles) {
