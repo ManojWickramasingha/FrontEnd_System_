@@ -4,36 +4,10 @@ import Button from '../../components/general/Button'
 import {BsChevronCompactLeft,BsChevronCompactRight} from 'react-icons/bs'
 import {RxDotFilled} from 'react-icons/rx'
 
-import tracking from '../../assets/tracking.png'
-import saving from '../../assets/saving.png'
-import analysis from '../../assets/analysis.png'
-import reporting from '../../assets/reporting.png'
+import { slides } from '../../constant/carousel';
 
 const HomePage = () => {
     const [currentIndex,setCurrentIndex] = useState(0);
-
-    const slides = [
-        {
-            url:tracking,
-            main:'Tracking',
-            sub:'This is a tracking feature available in Expense Tracker'
-        },
-        {
-            url:saving,
-            main:'Saving',
-            sub:'This is a Saving feature available in Expense Tracker'
-        },
-        {
-            url:analysis,
-            main:'Analysis',
-            sub:'This is a analyzing feature available in Expense Tracker'
-        },
-        {
-            url:reporting,
-            main:'Reporting',
-            sub:'This is a reporting feature available in Expense Tracker'
-        }
-    ];
 
     const prevIndex = () => {
         const nextIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
@@ -87,7 +61,7 @@ const HomePage = () => {
                 </div>
             </div>
             <div className='pageTemplate4'>
-                <div className='w-full flex justify-center text-5xl font-bold p-1 mb-5'>SERVICES</div>
+                <div className='w-full flex justify-center text-4xl font-bold p-1 mb-5'>SERVICES</div>
                 <div className='h-4/5 w-full flex flex-row gap-10 justify-center items-center'>
                     <div className='h-full w-1/4 flex flex-col justify-center items-center'>
                         <div className='w-full h-2/4 flex justify-center items-center'>
