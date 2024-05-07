@@ -71,13 +71,14 @@ const HomePage = () => {
                 </div>
             </div>
             <div className='pageTemplate4'>
-                <div className='w-full flex justify-center text-4xl font-bold p-1 mb-5'>SERVICES</div>
+                <div className='w-full flex justify-center text-4xl font-bold p-1 mb-1'>SERVICES</div>
+                <div className='w-full flex justify-center text-2xl font-semibold p-1 mb-3'>We provide a variety of services</div>
                 <div className='h-4/5 w-full flex flex-col justify-center items-center'>
                     <Swiper
                         breakpoints={{
                             340: {
                                 slidesPerView: 2,
-                                spaceBetween: 20
+                                spaceBetween: 10
                             },
                             700: {
                                 slidesPerView: 3,
@@ -89,12 +90,19 @@ const HomePage = () => {
                             clickable: true
                         }}
                         modules={[FreeMode, Pagination]}
-                        className='max-w-[90%] lg:max-w-[90%]'
+                        className='max-w-[95%] lg:max-w-[92%]'
                     >
                         {ServiceData.map((item) => (
                             <SwiperSlide key={item.title}>
-                                <div className='flex flex-col gap-6 group relative shadow-lg text-[#fff] rounded-xl px-6 py-8 h-[250px] w-[215px] lg:h-[400px] lg:w-[350px]'>
-                                    Hello
+                                <div className='flex flex-col gap-6 group relative shadow-lg text-[#fff] rounded-xl px-6 py-8 h-[250px] w-[215px] lg:h-[400px] lg:w-[350px] cursor-pointer'>
+                                    <div style={{backgroundImage: `url(${item.backgroundImage})`}} className='rounded-xl absolute inset-0 bg-center bg-cover' />
+                                    <div className='absolute inset-0 bg-black rounded-xl opacity-0 group-hover:opacity-20' />
+                                    <div className='relative flex flex-col gap-3'>
+                                        <item.icon className='text-green-500 group-hover:text-green-300 w-[32px] h-[32px]' />
+                                        <h1 className='text-xl lg:text-2xl'>{item.title}</h1>
+                                        <p className='lg:text-[18px]'>{item.content}</p>
+                                    </div>
+                                    <RxArrowTopRight className='absolute bottom-5 left-5 w-[35px] h-[35px] text-[#fff] group-hover:text-green-300 group-hover:rotate-45 duration-100' />
                                 </div>                                                    
                             </SwiperSlide>
                         ))}
