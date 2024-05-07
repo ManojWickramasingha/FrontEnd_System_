@@ -3,8 +3,18 @@ import ScrollToTop from '../../components/general/ScrollToTop'
 import Button from '../../components/general/Button'
 import {BsChevronCompactLeft,BsChevronCompactRight} from 'react-icons/bs'
 import {RxDotFilled} from 'react-icons/rx'
-
 import { slides } from '../../constant/carousel';
+
+import {Swiper,SwiperSlide} from 'swiper/react';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/free-mode';
+
+import {FreeMode,Pagination} from 'swiper/modules';
+
+import {RxArrowTopRight} from 'react-icons/rx';
+import { ServiceData } from '../../constant/services'
 
 const HomePage = () => {
     const [currentIndex,setCurrentIndex] = useState(0);
@@ -62,45 +72,36 @@ const HomePage = () => {
             </div>
             <div className='pageTemplate4'>
                 <div className='w-full flex justify-center text-4xl font-bold p-1 mb-5'>SERVICES</div>
-                <div className='h-4/5 w-full flex flex-row gap-10 justify-center items-center'>
-                    <div className='h-full w-1/4 flex flex-col justify-center items-center'>
-                        <div className='w-full h-2/4 flex justify-center items-center'>
-                            <div style={{backgroundImage: `url(${slides[0].url})`}} className='w-[200px] h-[200px] bg-center bg-cover duration-500'></div>
-                        </div>
-                        <div className='w-full h-2/4'>
-                            <h1></h1>
-                        </div>
-                    </div>
-                    <div className='h-full w-1/4 flex flex-col'>
-                        <div className='w-full h-2/4 flex justify-center items-center'>
-                            <div style={{backgroundImage: `url(${slides[3].url})`}} className='w-[200px] h-[200px] bg-center bg-cover duration-500'></div>
-                        </div>
-                        <div className='w-full h-2/4'></div>
-                    </div>
-                    <div className='h-full w-1/4 flex flex-col'>
-                        <div className='w-full h-2/4 flex justify-center items-center'>
-                            <div style={{backgroundImage: `url(${slides[2].url})`}} className='w-[200px] h-[200px] bg-center bg-cover duration-500'></div>
-                        </div>
-                        <div className='w-full h-2/4'></div>
-                    </div>
+                <div className='h-4/5 w-full flex flex-col justify-center items-center'>
+                    <Swiper
+                        breakpoints={{
+                            340: {
+                                slidesPerView: 2,
+                                spaceBetween: 20
+                            },
+                            700: {
+                                slidesPerView: 3,
+                                spaceBetween:20
+                            }
+                        }}
+                        freeMode={true}
+                        pagination={{
+                            clickable: true
+                        }}
+                        modules={[FreeMode, Pagination]}
+                        className='max-w-[90%] lg:max-w-[90%]'
+                    >
+                        {ServiceData.map((item) => (
+                            <SwiperSlide key={item.title}>
+                                <div className='flex flex-col gap-6 group relative shadow-lg text-[#fff] rounded-xl px-6 py-8 h-[250px] w-[215px] lg:h-[400px] lg:w-[350px]'>
+                                    Hello
+                                </div>                                                    
+                            </SwiperSlide>
+                        ))}
+
+                    </Swiper>
                 </div>
-                {/* Left Arrow */}
-                <div className='absolute top-[150%] left-10 -translate-x-0 translate-y-[-50%] text-2xl bg-[#fff] rounded-3xl p-2 cursor-pointer'>
-                    <BsChevronCompactLeft size={30} onClick={prevIndex} />
-                </div>
-                {/* Right Arrow */}
-                <div className='absolute top-[150%] right-10 -translate-x-0 translate-y-[-50%] text-2xl bg-[#fff] rounded-3xl p-2 cursor-pointer'>
-                    <BsChevronCompactRight size={30} onClick={nextIndex} />
-                </div>
-                <div className='flex absolute top-[185%] justify-center py-2'>
-                    {
-                        slides.map(() => (
-                            <div className='text-2xl cursor-pointer'>
-                                <RxDotFilled />
-                            </div>
-                        ))
-                    }
-                </div>
+                
             </div>
             <div className='pageTemplate5'>ABOUT</div>
             <div className='pageTemplate4'>CONTACT</div>

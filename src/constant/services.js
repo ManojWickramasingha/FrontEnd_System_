@@ -9,8 +9,8 @@ import {
 } from "react-icons/rx";
 
 // images
-import services01 from '../assets/services01';
-import services02 from '../assets/services02';
+import services01 from '../assets/services01.jpg';
+import services02 from '../assets/services02.png';
 
 // array of objects
 export const ServiceData = [

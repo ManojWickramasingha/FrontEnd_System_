@@ -8,7 +8,7 @@ import analysis from '../assets/analysis.png'
 import reporting from '../assets/reporting.png'
 
 // array of objects
-const slides = [
+export const slides = [
     {
         url:tracking,
         main:'Tracking',
