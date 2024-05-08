@@ -16,6 +16,8 @@ import {FreeMode,Pagination} from 'swiper/modules';
 import {RxArrowTopRight} from 'react-icons/rx';
 import { ServiceData } from '../../constant/services'
 
+import about from '../../assets/about.png';
+
 const HomePage = () => {
     const [currentIndex,setCurrentIndex] = useState(0);
 
@@ -71,7 +73,7 @@ const HomePage = () => {
                 </div>
             </div>
             <div className='pageTemplate4'>
-                <div className='w-full flex justify-center text-4xl font-bold p-1 mb-1'>SERVICES</div>
+                <div className='w-full flex justify-center items-center text-5xl font-bold p-5 mb-1'>SERVICES</div>
                 <div className='w-full flex justify-center text-2xl font-semibold p-1 mb-3'>We provide a variety of services</div>
                 <div className='h-4/5 w-full flex flex-col justify-center items-center'>
                     <Swiper
@@ -111,7 +113,25 @@ const HomePage = () => {
                 </div>
                 
             </div>
-            <div className='pageTemplate5'>ABOUT</div>
+            <div className='pageTemplate4 bg-white'>
+                <div className='w-full flex justify-center items-center text-5xl font-bold'>ABOUT</div>
+                <div className='w-full flex gap-10 justify-center items-center'>
+                    <div className='w-2/5 h-full flex flex-col gap-5 justify-start items-start pt-10'>
+                        <h1 className='text-5xl font-semibold'>What ???...</h1>
+                        <p className='text-[18px]'>
+                            Expensify is a powerhouse platform that helps you manage your company's spend — from receipt scanning and 
+                            expense management to paying bills and booking travel. Expensify is here to help your business succeed 
+                            every step of the way and provide valuable insight into your business's spending patterns.
+                        </p>
+                        <p className='text-[18px]'>
+                            That way, you can make smarter financial decisions and free up valuable time to focus on what matters most.
+                        </p>
+                    </div>
+                    <div className='w-2/5'>
+                        <div style={{backgroundImage: `url(${about})`}} className='w-[475px] h-[450px] bg-center bg-cover'></div>
+                    </div>
+                </div>
+            </div>
             <div className='pageTemplate4'>CONTACT</div>
             <div className='pageTemplate5'>BOTTOM</div>
         </div>
