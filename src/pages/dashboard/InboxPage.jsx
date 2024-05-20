@@ -40,17 +40,17 @@ const InboxPage = () => {
         <div className='pageTemplate2'>
             <h1 className='text-2xl font-bold'>Inbox</h1>
             <div className='pageTemplate3 items-stretch'>
-                <div className='grid grid-cols-8 p-2 border-2 border-gray-200 rounded-lg'>
-                    <span className='col-span-1'>Date</span>
+                <div className='grid grid-cols-10 p-2 border-2 border-gray-200 rounded-lg'>
+                    <span className='col-span-2'>Date</span>
                     <span>Type</span>
-                    <span className='col-span-4'>Text</span>
+                    <span className='col-span-5'>Text</span>
                     <span>Sender</span>
                     <span>Receiver</span>
                 </div>
                 {
                     messages.map((item) => (
-                        <div key={item.id} className='grid grid-cols-8 p-2 border-2 border-gray-200 rounded-lg'>
-                            <span className='col-span-1'>{moment(item.createdAt).fromNow()}</span>
+                        <div key={item.id} className='grid grid-cols-10 p-2 border-2 border-gray-200 rounded-lg'>
+                            <span className='col-span-2'>{moment(item.createdAt).fromNow()}</span>
                             <span>
                                 {item.senderUserName === user?.userName ? (
                                     <MdOutput className='text-2xl text-purple-500' />
@@ -58,7 +58,7 @@ const InboxPage = () => {
                                     <MdInput className='text-2xl text-green-500' />
                                 )}
                             </span>
-                            <span className='col-span-4'>{item.text}</span>
+                            <span className='col-span-5'>{item.text}</span>
                             <span>{item.senderUserName}</span>
                             <span>{item.receiverUserName}</span>
                         </div>
