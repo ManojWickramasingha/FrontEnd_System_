@@ -22,8 +22,6 @@ import {
     PATH_AFTER_LOGOUT,
     REGISTER_URL
 } from '../utils/globalConfig';
-import useAuth from '../hooks/useAuth.hook';
-
 
 // We need a reducer function for useReducer hook
 const authReducer = (state,action) => {
@@ -54,7 +52,7 @@ const initialAuthState = {
 };
 
 // we create our context here and export
-export const AuthContext = createContext(null);                                                                                                                             
+export const AuthContext = createContext(null);
 
 // we create a component to manage all auth functionalities and export it and use it
 const AuthContextProvider = ({ children }) => {
@@ -62,17 +60,15 @@ const AuthContextProvider = ({ children }) => {
     const navigate = useNavigate();
 
     // Initialize Method
-    // useCallback -> avoid the unnecessary render...
     const initializeAuthContext = useCallback(async () => {
         try {
             const token = getSession();
             if(token) {
                 // validate accessToken by calling backend
                 const response = await axiosInstance.post(ME_URL, {
-                    token,
+                    token
                 });
                 // In response, we receive jwt token and user data
-                // destructure the recieve data..
                 const { newToken, userInfo } = response.data;
                 setSession(newToken);
                 dispatch({
