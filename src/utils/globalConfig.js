@@ -7,9 +7,9 @@ export const LOGIN_URL = 'https://localhost:7026/login';
 export const ME_URL = 'https://localhost:7026/me';
 export const USERS_LIST_URL = 'https://localhost:7026/users';
 export const USERNAMES_LIST_URL = 'https://localhost:7026/usernames';
-export const ALL_MESSAGES_URL = '/Messages';
-export const CREATE_MESSAGES_URL = '/Messages/create';
-export const MY_MESSAGE_URL = '/Messages/mine';
+export const ALL_MESSAGES_URL = 'https://localhost:7026/api/Messages';
+export const CREATE_MESSAGES_URL = 'https://localhost:7026/api/Messages/create';
+export const MY_MESSAGE_URL = 'https://localhost:7026/api/Messages/mine';
 export const LOGS_URL = 'https://localhost:7026/api/Log';
 export const MY_LOGS_URL = 'https://localhost:7026/api/Log/mine';
 

@@ -13,6 +13,7 @@ import SystemLogsPage from '../pages/dashboard/admin/SystemLogsPage';
 import UserDashboard from '../pages/dashboard/user/UserDashboard';
 import AnalysisPage from '../pages/dashboard/user/Analysis';
 import TransactionPage from '../pages/dashboard/user/Transaction';
+import SavingPage from '../pages/dashboard/user/Saving';
 import ReportPage from '../pages/dashboard/user/Report';
 import RemenderPage from '../pages/dashboard/user/Remender';
 import OrganizationPage from '../pages/dashboard/user/Organization';
@@ -43,6 +44,7 @@ const GlobalRouter = () => {
                     <Route path={PATH_DASHBOARD_USER.dashboard} element={<UserDashboard />} />
                     <Route path={PATH_DASHBOARD_USER.analysis} element={<AnalysisPage />} />
                     <Route path={PATH_DASHBOARD_USER.transaction} element={<TransactionPage />} />
+                    <Route path={PATH_DASHBOARD_USER.saving} element={<SavingPage />} />
                     <Route path={PATH_DASHBOARD_USER.report} element={<ReportPage />} />
                     <Route path={PATH_DASHBOARD_USER.remender} element={<RemenderPage />} />
                     <Route path={PATH_DASHBOARD_USER.organization} element={<OrganizationPage />} />
