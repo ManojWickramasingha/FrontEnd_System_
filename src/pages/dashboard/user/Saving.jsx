@@ -2,7 +2,7 @@ import React from 'react'
 
 const Saving = () => {
     return (
-        <div className='pageTemplate2'>Saving</div>
+        <div className='pageTemplate2'>SavingPage</div>
     )
 }
 
