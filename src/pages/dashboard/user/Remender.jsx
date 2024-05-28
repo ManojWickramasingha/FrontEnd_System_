@@ -4,7 +4,7 @@ import MyCalendar from "../../../components/ReminderComponents/Calender";
 const Remender = () => {
   return (
     <div className="pageTemplate2">
-      RemenderPage
+      <h1>Reminder</h1>
       <div className="calender">
         <MyCalendar />
       </div>

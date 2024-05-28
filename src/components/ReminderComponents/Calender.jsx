@@ -14,8 +14,8 @@ const myEventsList = [
   //   title: "Birthday",
   // },
   {
-    start: moment("2024-03-12T14:00:00").toDate(),
-    end: moment("2024-03-12T14:00:00").toDate(),
+    start: moment("2024-04-12T14:00:00").toDate(),
+    end: moment("2024-04-12T14:00:00").toDate(),
     title: "name",
   },
   {
@@ -24,8 +24,8 @@ const myEventsList = [
     title: "special event",
   },
   {
-    start: moment("2024-03-14T14:00:00").toDate(),
-    end: moment("2024-03-14T14:00:00").toDate(),
+    start: moment("2024-04-14T14:00:00").toDate(),
+    end: moment("2024-04-14T14:00:00").toDate(),
     title: "Birthday",
   }
   // {
