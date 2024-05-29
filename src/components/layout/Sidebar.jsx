@@ -85,6 +85,12 @@ const Sidebar = () => {
                             variant='secondary'
                         />
                         <Button
+                            label='Budget'
+                            onClick={() => handelClick(PATH_DASHBOARD_USER.budget)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
                             label='Report'
                             onClick={() => handelClick(PATH_DASHBOARD_USER.report)}
                             type='button'
