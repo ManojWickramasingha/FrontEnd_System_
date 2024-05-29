@@ -10,6 +10,8 @@ export const PATH_DASHBOARD_USER = {
     dashboard: '/user/dashboard',
     analysis: '/user/dashboard/analysis',
     transaction: '/user/dashboard/transaction',
+    saving: '/user/dashboard/saving',
+    budget: '/user/dashboard/budget',
     report: '/user/dashboard/report',
     remender: '/user/dashboard/remender',
     organization: '/user/dashboard/organization',

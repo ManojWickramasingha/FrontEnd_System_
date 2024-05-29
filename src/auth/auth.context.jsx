@@ -22,8 +22,6 @@ import {
     PATH_AFTER_LOGOUT,
     REGISTER_URL
 } from '../utils/globalConfig';
-import useAuth from '../hooks/useAuth.hook';
-
 
 // We need a reducer function for useReducer hook
 const authReducer = (state,action) => {
