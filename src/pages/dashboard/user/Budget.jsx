@@ -5,7 +5,7 @@ const Budget = () => {
 
     return (
         <div className="pageTemplate2">
-            {/* Your JSX here */}
+            BudgetPage
         </div>
     );
 };
