@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Report = () => {
+const UserReportPage = () => {
     return (
         <div className='pageTemplate2'>ReportPage</div>
     )
 }
 
-export default Report
+export default UserReportPage

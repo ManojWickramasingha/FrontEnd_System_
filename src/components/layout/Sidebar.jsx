@@ -19,9 +19,9 @@ const Sidebar = () => {
 
             <div className='self-center flex flex-col items-center'>
                 <CiUser className='w-10 h-10 text-[#e5fafe]' />
-                <h4 className='text-[#e5fafe]'>
+                <h5 className='text-[#e5fafe]'>
                     {user?.firstName} {user?.lastName}
-                </h4>
+                </h5>
             </div>
 
             {
@@ -60,6 +60,18 @@ const Sidebar = () => {
                         <Button
                             label='My Logs'
                             onClick={() => handelClick(PATH_DASHBOARD_ADMIN.myLogs)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='Remender'
+                            onClick={() => handelClick(PATH_DASHBOARD_ADMIN.remender)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='Setting'
+                            onClick={() => handelClick(PATH_DASHBOARD_ADMIN.setting)}
                             type='button'
                             variant='secondary'
                         />
@@ -105,6 +117,18 @@ const Sidebar = () => {
                         <Button
                             label='Organization'
                             onClick={() => handelClick(PATH_DASHBOARD_USER.organization)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='Inbox'
+                            onClick={() => handelClick(PATH_DASHBOARD_USER.inbox)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='Send Message'
+                            onClick={() => handelClick(PATH_DASHBOARD_USER.sendMessage)}
                             type='button'
                             variant='secondary'
                         />

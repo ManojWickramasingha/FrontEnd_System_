@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import axiosInstance from '../../utils/axiosInstance';
-import { MY_LOGS_URL } from '../../utils/globalConfig';
+import axiosInstance from '../../../utils/axiosInstance';
+import { MY_LOGS_URL } from '../../../utils/globalConfig';
 import { toast } from 'react-hot-toast';
-import Spinner from '../../components/general/Spinner';
+import Spinner from '../../../components/general/Spinner';
 import moment from 'moment';
 
 const MyLogsPage = () => {

@@ -18,7 +18,6 @@ export const PATH_DASHBOARD_USER = {
     setting: '/user/dashboard/setting',
     sendMessage: '/user/dashboard/send-message',
     inbox: '/user/dashboard/inbox',
-    myLogs: '/user/dashboard/my-logs',
 }
 
 export const PATH_DASHBOARD_ADMIN = {
@@ -30,4 +29,6 @@ export const PATH_DASHBOARD_ADMIN = {
     sendMessage: '/admin/dashboard/send-message',
     inbox: '/admin/dashboard/inbox',
     myLogs: '/admin/dashboard/my-logs',
+    remender: '/admin/dashboard/remender',
+    setting: '/admin/dashboard/setting'
 }
