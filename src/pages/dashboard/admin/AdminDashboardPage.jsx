@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AdminDashboard = () => {
+const AdminDashboardPage = () => {
     return (
         <div className='pageTemplate2'>
             AdminDashboardPage
@@ -8,4 +8,4 @@ const AdminDashboard = () => {
     )
 }
 
-export default AdminDashboard;
+export default AdminDashboardPage;

@@ -1,7 +1,7 @@
 import React from "react";
 import MyCalendar from "../../../components/ReminderComponents/Calender";
 
-const Remender = () => {
+const UserRemenderPage = () => {
   return (
     <div className="pageTemplate2">
       <h1>Reminder</h1>
@@ -12,4 +12,4 @@ const Remender = () => {
   );
 };
 
-export default Remender;
+export default UserRemenderPage;

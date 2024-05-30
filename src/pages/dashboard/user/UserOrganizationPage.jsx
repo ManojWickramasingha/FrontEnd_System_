@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Organization = () => {
+const UserOrganizationPage = () => {
     return (
         <div className='pageTemplate2'>OrganizationPage</div>
     )
 }
 
-export default Organization
+export default UserOrganizationPage

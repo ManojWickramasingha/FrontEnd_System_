@@ -4,7 +4,7 @@ import Charts from '../../../components/dashboard/Chart';
 import PrgressCircular from '../../../components/dashboard/PrgressCircular';
 import Spinner from '../../../components/general/Spinner';
 
-const UserDashboard = () => {
+const UserDashboardPage = () => {
     return (
         <div className='pageTemplate2'>
             <div className='p-3 bg-light'>
@@ -26,4 +26,4 @@ const UserDashboard = () => {
     )
 }
 
-export default UserDashboard;
+export default UserDashboardPage;

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import axiosInstance from '../../utils/axiosInstance';
-import { MY_MESSAGE_URL } from '../../utils/globalConfig';
+import axiosInstance from '../../../utils/axiosInstance';
+import { MY_MESSAGE_URL } from '../../../utils/globalConfig';
 import { toast } from 'react-hot-toast';
-import Spinner from '../../components/general/Spinner';
+import Spinner from '../../../components/general/Spinner';
 import moment from 'moment';
 import { MdInput, MdOutput } from 'react-icons/md';
-import useAuth from '../../hooks/useAuth.hook';
+import useAuth from '../../../hooks/useAuth.hook';
 
 const InboxPage = () => {
     const { user } = useAuth();

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Saving = () => {
+const UserSavingPage = () => {
     return (
         <div className='pageTemplate2'>SavingPage</div>
     )
 }
 
-export default Saving
+export default UserSavingPage

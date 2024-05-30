@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Budget = () => {
+const UserBudgetPage = () => {
     // Your component logic here
 
     return (
@@ -10,4 +10,4 @@ const Budget = () => {
     );
 };
 
-export default Budget;
+export default UserBudgetPage;

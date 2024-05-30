@@ -63,6 +63,18 @@ const Sidebar = () => {
                             type='button'
                             variant='secondary'
                         />
+                        <Button
+                            label='Remender'
+                            onClick={() => handelClick(PATH_DASHBOARD_ADMIN.remender)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='Setting'
+                            onClick={() => handelClick(PATH_DASHBOARD_ADMIN.setting)}
+                            type='button'
+                            variant='secondary'
+                        />
                     </div>
                 ) : (
                     <div className='flex flex-col items-stretch gap-6'>
@@ -105,6 +117,18 @@ const Sidebar = () => {
                         <Button
                             label='Organization'
                             onClick={() => handelClick(PATH_DASHBOARD_USER.organization)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='Inbox'
+                            onClick={() => handelClick(PATH_DASHBOARD_USER.inbox)}
+                            type='button'
+                            variant='secondary'
+                        />
+                        <Button
+                            label='Send Message'
+                            onClick={() => handelClick(PATH_DASHBOARD_USER.sendMessage)}
                             type='button'
                             variant='secondary'
                         />

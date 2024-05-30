@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
-import { CREATE_MESSAGES_URL, USERNAMES_LIST_URL } from '../../utils/globalConfig';
-import axiosInstance from '../../utils/axiosInstance';
+import { CREATE_MESSAGES_URL, USERNAMES_LIST_URL } from '../../../utils/globalConfig';
+import axiosInstance from '../../../utils/axiosInstance';
 import { toast } from 'react-hot-toast';
-import Spinner from '../../components/general/Spinner';
-import UsernamesComboBox from '../../components/dashboard/UsernamesComboBox';
+import Spinner from '../../../components/general/Spinner';
+import UsernamesComboBox from '../../../components/dashboard/UsernamesComboBox';
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import InputField from '../../components/general/InputField';
-import Button from '../../components/general/Button';
+import InputField from '../../../components/general/InputField';
+import Button from '../../../components/general/Button';
 import { useNavigate } from 'react-router-dom';
-import { PATH_DASHBOARD_ADMIN } from '../../routes/paths';
+import { PATH_DASHBOARD_USER } from '../../../routes/paths';
 
-const SendMessagePage = () => {
+const UserSendMessagePage = () => {
     const [usernames,setUsernames] = useState([]);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -68,7 +68,7 @@ const SendMessagePage = () => {
             await axiosInstance.post(CREATE_MESSAGES_URL, newMessage);
             setLoading(false);
             toast.success('Your message Sent successfully.');
-            navigate(PATH_DASHBOARD_ADMIN.inbox);
+            navigate(PATH_DASHBOARD_USER.inbox);
         } catch(error) {
             setLoading(false);
             reset();
@@ -109,4 +109,4 @@ const SendMessagePage = () => {
     )
 }
 
-export default SendMessagePage
+export default UserSendMessagePage

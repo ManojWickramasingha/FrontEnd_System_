@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Setting = () => {
+const UserSettingPage = () => {
     return (
         <div className='pageTemplate2'>SettingPage</div>
     )
 }
 
-export default Setting
+export default UserSettingPage
