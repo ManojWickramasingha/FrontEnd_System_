@@ -19,9 +19,9 @@ const Sidebar = () => {
 
             <div className='self-center flex flex-col items-center'>
                 <CiUser className='w-10 h-10 text-[#e5fafe]' />
-                <h4 className='text-[#e5fafe]'>
+                <h5 className='text-[#e5fafe]'>
                     {user?.firstName} {user?.lastName}
-                </h4>
+                </h5>
             </div>
 
             {

@@ -3,7 +3,7 @@ import { CREATE_MESSAGES_URL, USERNAMES_LIST_URL } from '../../utils/globalConfi
 import axiosInstance from '../../utils/axiosInstance';
 import { toast } from 'react-hot-toast';
 import Spinner from '../../components/general/Spinner';
-import UsernamesComboBox from '../../components/dashboard/send-message/UsernamesComboBox';
+import UsernamesComboBox from '../../components/dashboard/UsernamesComboBox';
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
