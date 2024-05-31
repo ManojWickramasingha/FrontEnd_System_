@@ -1,5 +1,3 @@
-import { IconType } from 'react-icons';
-
 const UserCountCard = ({ count, role, icon: Icon , color }) => {
     return (
         <div className='px-4 py-6 rounded-lg flex- justify-between items-center text-white'

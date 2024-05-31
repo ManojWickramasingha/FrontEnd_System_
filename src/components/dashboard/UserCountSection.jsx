@@ -6,9 +6,9 @@ const UserCountSection = ({ usersList }) => {
     let users = 0;
 
     usersList.forEach((item) => {
-        if(item.roles.include('admin')){
+        if(item.roles.includes('Admin')){
             admins++;
-        } else if(item.roles.include('user')) {
+        } else if(item.roles.includes('User')) {
             users++;
         }
     });

@@ -3,9 +3,9 @@ import moment from 'moment';
 const UsersTableSection = ({ usersList }) => {
     const RoleClassNameCreator = (Roles) => {
         let className = 'px-3 py-1 text-white rounded-3xl ';
-        if(Roles.include('admin')){
+        if(Roles === 'Admin'){
             className += 'bg-[#0B96BC]';
-        } else if(Roles.include('user')){
+        } else if(Roles === 'User'){
             className += 'bg-[#FEC223]';
         }
         return className;
