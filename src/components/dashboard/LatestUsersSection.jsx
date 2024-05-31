@@ -1,9 +1,9 @@
 import moment from "moment";
 
-
 const LatestUsersSection = ({ usersList }) => {
     const selectedUsers = usersList.sort((a,b) => {
         if(a.createdAt < b.createdAt){
+            // change...
             return 1;
         } else return -1;
     });
