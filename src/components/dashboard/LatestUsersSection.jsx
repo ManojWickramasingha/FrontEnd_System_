@@ -16,7 +16,7 @@ const LatestUsersSection = ({ usersList }) => {
                     <div key={item.id} className="bg-gray-100 p-2 my-4 rounded-md">
                         <div className="flex justify-between items-center">
                             <span className="text-lg font-bold">{item.userName}</span>
-                            <span className="px-2 text-sm text-white bg-purple-500 rounded-xl">
+                            <span className="px-2 py-1 text-sm text-white bg-purple-500 rounded-xl">
                                 {
                                     moment(item.createdAt).fromNow()
                                 }

@@ -1,8 +1,8 @@
 const UserCountCard = ({ count, role, icon: Icon , color }) => {
     return (
-        <div className='px-4 py-6 rounded-lg flex- justify-between items-center text-white'
+        <div className='px-4 py-6 rounded-lg flex justify-around items-center text-white'
             style={{ backgroundColor: color }}>
-            <div>
+            <div className="flex flex-col justify-center items-center">
                 <h2 className='text-4xl'>{ count }</h2>
                 <h2 className='text-xl'>{ role }</h2>
             </div>
