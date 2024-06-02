@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Analysis = () => {
+const UserAnalysisPage = () => {
     return (
         <div className='pageTemplate2'>AnalysisPage</div>
     )
 }
 
-export default Analysis
+export default UserAnalysisPage

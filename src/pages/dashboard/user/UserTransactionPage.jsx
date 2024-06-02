@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Transaction = () => {
+const UserTransactionPage = () => {
     return (
         <div className='pageTemplate2'>TransactionPage</div>
     )
 }
 
-export default Transaction
+export default UserTransactionPage
