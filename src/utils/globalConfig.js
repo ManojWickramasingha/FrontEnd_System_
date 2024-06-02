@@ -1,3 +1,5 @@
+<<<<<<<<< Temporary merge branch 1
+=========
 import { PATH_DASHBOARD_ADMIN, PATH_DASHBOARD_USER, PATH_PUBLIC } from "../routes/paths";
 
 // URLS -> about backend
@@ -18,3 +20,4 @@ export const PATH_AFTER_REGISTER = PATH_PUBLIC.login;
 export const PATH_AFTER_LOGIN_ADMIN = PATH_DASHBOARD_ADMIN.dashboard;
 export const PATH_AFTER_LOGIN_USER = PATH_DASHBOARD_USER.dashboard;
 export const PATH_AFTER_LOGOUT = PATH_PUBLIC.home;
+>>>>>>>>> Temporary merge branch 2
