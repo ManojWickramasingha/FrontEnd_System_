@@ -48,14 +48,25 @@ const MyCalendar = (props) => {
   
   };
   return (
-    <div><Calendar
+    <div>
+      <style>
+        {`
+          .rbc-toolbar-label {
+            font-size: 30px !important;
+          }
+          .rbc-today {
+            background-color: #4ADE80 !important;
+          }
+        `}
+      </style>
+      <Calendar
         localizer={localizer}
         events={myEventsList}
         startAccessor="start"
         endAccessor="end"
         selectable={true}
         onSelectSlot={handlePopup}
-        style={{ height: 500 }}
+        style={{ height: 600 }}
         views={{ month: true }}
       />
 

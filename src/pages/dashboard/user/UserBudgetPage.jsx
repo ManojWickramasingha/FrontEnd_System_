@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const UserBudgetPage = () => {
     // Your component logic here
@@ -11,3 +11,4 @@ const UserBudgetPage = () => {
 };
 
 export default UserBudgetPage;
+
