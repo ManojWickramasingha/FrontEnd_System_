@@ -94,12 +94,14 @@ export default function ReminderSet({ open, setOpen, rdate }) {
         <Button
           onClick={handleClose}
           sx={{
-            
+            fontWeight: "bold",
           }}
         >
           Cancel
         </Button>
-        <Button type="submit">Subscribe</Button>
+        <Button type="submit" sx={{ fontWeight: "bold" }}>
+          Subscribe
+        </Button>
       </DialogActions>
     </Dialog>
   );

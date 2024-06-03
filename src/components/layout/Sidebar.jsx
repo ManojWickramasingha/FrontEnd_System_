@@ -70,7 +70,7 @@ const Sidebar = () => {
                             variant='secondary'
                         />
                         <Button
-                            label='Setting'
+                            label='Settings'
                             onClick={() => handelClick(PATH_DASHBOARD_ADMIN.setting)}
                             type='button'
                             variant='secondary'
@@ -109,7 +109,7 @@ const Sidebar = () => {
                             variant='secondary'
                         />
                         <Button
-                            label='Remender'
+                            label='Reminder'
                             onClick={() => handelClick(PATH_DASHBOARD_USER.remender)}
                             type='button'
                             variant='secondary'
