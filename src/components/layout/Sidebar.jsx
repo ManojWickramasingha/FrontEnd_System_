@@ -15,7 +15,7 @@ const Sidebar = () => {
     };
 
     return (
-        <div className='shrink-0 bg-[#07271f] w-60 p-2 min-h-[calc(100vh-48px)] flex flex-col items-stretch gap-8'>
+        <div className='fixed top-12 bottom-0 h-[100vh+12] overflow-y-scroll scrollbar shrink-0 bg-[#07271f] w-60 p-2 min-h-[calc(100vh-48px)] flex flex-col items-stretch gap-8'>
 
             <div className='self-center flex flex-col items-center'>
                 <CiUser className='w-10 h-10 text-[#e5fafe]' />
@@ -26,7 +26,7 @@ const Sidebar = () => {
 
             {
                 user.roles == "Admin" ? (
-                    <div className='flex flex-col items-stretch gap-6'>
+                    <div className='flex flex-col items-stretch gap-3'>
                         <Button
                             label='Users Management'
                             onClick={() => handelClick(PATH_DASHBOARD_ADMIN.usersManagement)}
@@ -77,7 +77,7 @@ const Sidebar = () => {
                         />
                     </div>
                 ) : (
-                    <div className='flex flex-col items-stretch gap-6'>
+                    <div className='flex flex-col items-stretch gap-3'>
                         <Button
                             label='Analysis'
                             onClick={() => handelClick(PATH_DASHBOARD_USER.analysis)}

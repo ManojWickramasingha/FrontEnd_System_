@@ -102,7 +102,7 @@ const UserSendMessagePage = () => {
                     <div className='flex justify-center items-center gap-4 mt-6'>
                         <Button variant='secondary' type='button' label='Discard' onClick={() => navigate(PATH_DASHBOARD_ADMIN.inbox)} />
                         <Button variant='primary' type='submit' label='Send' onClick={() => {}} loading={loading} />
-                    </div>                                                                                                                  
+                    </div>
                 </form>
             </div>
         </div>
