@@ -41,9 +41,9 @@ const BudgetForm = ({ onCreateBudget }) => {
         placeholder="e.g., $350"
       />
       <Button
+      style={{ backgroundColor: '#111C1D', }}
         variant="contained"
         color="primary"
-        fullWidth
         onClick={handleCreateBudget}
       >
         Create budget

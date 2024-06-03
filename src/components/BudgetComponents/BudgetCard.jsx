@@ -27,7 +27,7 @@ const BudgetCard = ({ budget }) => {
           <Typography color="textSecondary">${spent.toFixed(2)} spent</Typography>
           <Typography color="textSecondary">${remaining.toFixed(2)} remaining</Typography>
         </Box>
-        <Button variant="contained" color="primary" fullWidth>
+        <Button variant="contained" color="primary"  style={{ backgroundColor: '#111C1D' }}>
           View Details
         </Button>
       </CardContent>
