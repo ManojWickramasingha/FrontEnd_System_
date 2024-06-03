@@ -2,7 +2,9 @@ import React from 'react'
 
 const AdminSettingPage = () => {
     return (
-        <div className='pageTemplate2'>AdminSettingPage</div>
+        <div className='pageTemplate2'>
+            <h1 className='text-3xl font-bold'>Setting</h1>
+        </div>
     )
 }
 

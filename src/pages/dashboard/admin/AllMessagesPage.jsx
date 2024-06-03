@@ -35,7 +35,7 @@ const AllMessagesPage = () => {
 
     return (
         <div className='pageTemplate2'>
-            <h1 className='text-2xl font-bold'>All Messages</h1>
+            <h1 className='text-3xl font-bold'>All Messages</h1>
             <div className='pageTemplate3 items-stretch'>
                 <div className='grid grid-cols-10 p-2 border-2 border-gray-200 rounded-lg'>
                     <span className='col-span-2'>Date</span>

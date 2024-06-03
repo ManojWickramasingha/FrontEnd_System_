@@ -38,7 +38,7 @@ const UsersManagementPage = () => {
 
     return (
         <div className='pageTemplate2'>
-            <h1 className='text-2xl font-bold'>Users Management</h1>
+            <h1 className='text-3xl font-bold'>Users Management</h1>
             <UserCountSection usersList={users} />
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-x-4'>
                 <UserChartSection usersList={users} />
