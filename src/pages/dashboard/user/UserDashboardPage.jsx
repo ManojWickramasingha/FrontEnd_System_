@@ -7,7 +7,7 @@ import Spinner from '../../../components/general/Spinner';
 const UserDashboardPage = () => {
     return (
         <div className='pageTemplate2'>
-            <h1 className='text-2xl font-bold'>Users Management</h1>
+            <h1 className='text-2xl font-bold'>Users Dashboard</h1>
             <div className='p-3 bg-light'>
                 <div className='container-fluid'>
                     <div>
