@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import { Container, TextField, Button, Box, Typography } from '@mui/material';
-import { styled } from '@mui/system';
+import React, { useState } from "react";
+import { Container, TextField, Button, Box, Typography } from "@mui/material";
+import { styled } from "@mui/system";
 
 const FormContainer = styled(Box)({
-  border: '1px dashed #ccc',
-  padding: '20px',
-  borderRadius: '10px',
-  marginBottom: '20px'
+  border: "1px dashed #ccc",
+  padding: "20px",
+  borderRadius: "10px",
+  marginBottom: "20px",
 });
 
 const BudgetForm = ({ onCreateBudget }) => {
-  const [budgetName, setBudgetName] = useState('');
-  const [amount, setAmount] = useState('');
+  const [budgetName, setBudgetName] = useState("");
+  const [amount, setAmount] = useState("");
 
   const handleCreateBudget = () => {
     onCreateBudget({ budgetName, amount: parseFloat(amount) });
-    setBudgetName('');
-    setAmount('');
+    setBudgetName("");
+    setAmount("");
   };
 
   return (
@@ -41,12 +41,17 @@ const BudgetForm = ({ onCreateBudget }) => {
         placeholder="e.g., $350"
       />
       <Button
-      style={{ backgroundColor: '#111C1D', }}
+        style={{
+          backgroundColor: "#07271F",
+          textTransform: "none",
+          marginTop: "10px",
+          fontSize: "16px",
+        }}
         variant="contained"
         color="primary"
         onClick={handleCreateBudget}
       >
-        Create budget
+        Create Budget
       </Button>
     </FormContainer>
   );
