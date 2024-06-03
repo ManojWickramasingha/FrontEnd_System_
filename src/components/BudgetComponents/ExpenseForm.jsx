@@ -60,8 +60,8 @@ const ExpenseForm = ({ onAddExpense, budgetCategories }) => {
       <Button
         variant="contained"
         color="primary"
-        fullWidth
         onClick={handleAddExpense}
+        style={{ backgroundColor: '#07271F', textTransform: 'none' , marginTop: '10px', fontSize: '16px'}}
       >
         Add Expense
       </Button>
