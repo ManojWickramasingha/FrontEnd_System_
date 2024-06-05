@@ -32,6 +32,7 @@ const ExpenseForm = ({ onAddExpense, budgetCategories }) => {
         value={expenseName}
         onChange={(e) => setExpenseName(e.target.value)}
         placeholder="e.g., Coffee"
+        required
       />
       <TextField
         label="Amount"
@@ -41,8 +42,10 @@ const ExpenseForm = ({ onAddExpense, budgetCategories }) => {
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
         placeholder="e.g., 3.50"
+        required
       />
       <TextField
+        required
         select
         label="Budget Category"
         variant="outlined"

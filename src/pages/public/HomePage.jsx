@@ -133,7 +133,7 @@ const HomePage = () => {
                 </div>
             </div>
             <div className='pageTemplate4'>CONTACT</div>
-            <div className='pageTemplate5'>BOTTOM</div>
+            <div className='pageTemplate5'>Bottom</div>
         </div>
     )
 }

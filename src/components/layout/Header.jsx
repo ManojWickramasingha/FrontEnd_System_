@@ -12,7 +12,6 @@ import { useContext } from "react";
 import { RiAdminFill } from "react-icons/ri";
 import { FaUser } from "react-icons/fa6";
 import ModeContext from "../../auth/mode.context";
-import SearchIcon from "@mui/icons-material/Search";
 
 const Header = () => {
   const { isAuthenticated, isAuthLoading, user, logout } = useAuth();
@@ -71,14 +70,6 @@ const Header = () => {
       <div className="flex items-center">
         {isAuthenticated ? (
           <div className="flex items-center gap-2">
-            <input
-              className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none button-styles"
-              type="search"
-              name="search"
-              placeholder="Search"
-              style={{backgroundColor: "#07271F"}}
-            />
-
             <Button
               label="Dashboard"
               onClick={() =>

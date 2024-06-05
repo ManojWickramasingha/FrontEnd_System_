@@ -9,8 +9,8 @@ const BudgetCardContainer = styled(Card)(({ theme }) => ({
   border: `1px solid ${theme.palette.divider}`,
 }));
 
-const BudgetCard = ({ budget }) => {
-  const spent = 0; // Replace with actual spent calculation
+const BudgetCard = ({ budget, onViewDetails, onDelete }) => {
+  const spent = budget.expenses.reduce((total, expense) => total + expense.amount, 0);
   const remaining = budget.amount - spent;
 
   return (
@@ -27,9 +27,25 @@ const BudgetCard = ({ budget }) => {
           <Typography color="textSecondary">${spent.toFixed(2)} spent</Typography>
           <Typography color="textSecondary">${remaining.toFixed(2)} remaining</Typography>
         </Box>
-        <Button variant="contained" color="primary"   style={{ backgroundColor: '#07271F', textTransform: 'none' , marginTop: '10px', fontSize: '16px'}}>
-          View Details
-        </Button>
+        <Box display="flex" justifyContent="space-between" mt={2}>
+          <Button 
+            variant="contained" 
+            color="primary"   
+            style={{ backgroundColor: '#07271F', textTransform: 'none', fontSize: '16px'}}
+            onClick={() => onViewDetails(budget)}
+          >
+            View Details
+          </Button>
+          <Button 
+          
+            variant="contained" 
+            color="secondary"   
+            style={{ backgroundColor: '#faeae8', textTransform: 'none', fontSize: '16px', color: 'red'}}
+            onClick={() => onDelete(budget)}
+          >
+            Delete
+          </Button>
+        </Box>
       </CardContent>
     </BudgetCardContainer>
   );
