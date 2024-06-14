@@ -1,28 +1,32 @@
-import * as React from "react";
+import React from "react";
 import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
-// import CloseIcon from '@mui/icons-material/Close';
-import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { DialogContentText } from "@mui/material";
+import moment from "moment";
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialogContent-root": {
-    padding: theme.spacing(2),
-  },
-  "& .MuiDialogActions-root": {
-    padding: theme.spacing(1),
-  },
-}));
-
-export default function ReminderSet({ open, setOpen, rdate }) {
+const ReminderSet = ({ open, setOpen, rdate, addEvent }) => {
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const formJson = Object.fromEntries(formData.entries());
+
+    const newEvent = {
+      start: moment(rdate).toDate(),
+      end: moment(rdate).toDate(),
+      title: formJson.name,
+      amount: formJson.amount,
+      description: formJson.desc,
+    };
+
+    addEvent(newEvent);
   };
 
   return (
@@ -31,14 +35,7 @@ export default function ReminderSet({ open, setOpen, rdate }) {
       onClose={handleClose}
       PaperProps={{
         component: "form",
-        onSubmit: (event) => {
-          event.preventDefault();
-          const formData = new FormData(event.currentTarget);
-          const formJson = Object.fromEntries(formData.entries());
-          const email = formJson.email;
-          console.log("This is popup open");
-          handleClose();
-        },
+        onSubmit: handleSubmit,
       }}
     >
       <DialogTitle>Set Reminder</DialogTitle>
@@ -91,12 +88,7 @@ export default function ReminderSet({ open, setOpen, rdate }) {
         />
       </DialogContent>
       <DialogActions>
-        <Button
-          onClick={handleClose}
-          sx={{
-            fontWeight: "bold",
-          }}
-        >
+        <Button onClick={handleClose} sx={{ fontWeight: "bold" }}>
           Cancel
         </Button>
         <Button type="submit" sx={{ fontWeight: "bold" }}>
@@ -105,4 +97,6 @@ export default function ReminderSet({ open, setOpen, rdate }) {
       </DialogActions>
     </Dialog>
   );
-}
+};
+
+export default ReminderSet;
