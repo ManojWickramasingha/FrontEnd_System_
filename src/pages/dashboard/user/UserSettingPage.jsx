@@ -12,7 +12,7 @@ const UserSettingPage = () => {
     const { user, updateFirstNameLastName } = useAuth();
     const [loading, setLoading] = useState(false);
 
-    //
+    // ----
     const updateFirstNameLastName_ = Yup.object().shape({
         firstName: Yup.string()
             .required('First Name is required'),
@@ -21,18 +21,37 @@ const UserSettingPage = () => {
     });
 
     // ----
+    const updateUserName_ = Yup.object().shape({
+        userName: Yup.string()
+            .required('User Name is required'),
+    });
+
+    // ----
     const {
-        control,
-        handleSubmit,
-        formState: { errors },
-        reset
+        control: controlFirstNameLastName,
+        handleSubmit: handleSubmitFirstNameLastName,
+        formState: { errors: errorsFirstNameLastName },
+        reset: resetFirstNameLastName
     } = useForm({
         resolver: yupResolver(updateFirstNameLastName_),
         defaultValues: {
             firstName: '',
             lastName: ''
         }
-    })
+    });
+
+    // ----
+    const {
+        control: controlUserName,
+        handleSubmit: handleSubmitUserName,
+        formState: { errors: errorsUserName },
+        reset: resetUserName
+    } = useForm({
+        resolver: yupResolver(updateUserName_),
+        defaultValues: {
+            userName: ''
+        }
+    });
 
     // ----
     const onSubmitUpdateFirstNameLastName = async(submittedData) => {
@@ -47,6 +66,9 @@ const UserSettingPage = () => {
             toast.error('An Error occurred. Please contact admin');
         }
     }
+
+    // ----
+    const onSubmitUpdateUserName = () => {};
 
 
     // ----
@@ -63,12 +85,20 @@ const UserSettingPage = () => {
                 <div className="grid grid-cols-3">
                     <div className="col-span-1"></div>
                     <div className="col-span-2">
-                        <form onSubmit={handleSubmit(onSubmitUpdateFirstNameLastName)}>
+                        <form onSubmit={handleSubmitFirstNameLastName(onSubmitUpdateFirstNameLastName)}>
                             {/* given diferent inputName for separately working */}
-                            <InputField control={control} label={'First Name'} inputName={'firstName'} error={errors.firstName?.message} />
-                            <InputField control={control} label={'Last Name'} inputName={'lastName'} error={errors.lastName?.message} />
+                            <InputField control={controlFirstNameLastName} label={'First Name'} inputName={'firstName'} error={errorsFirstNameLastName.firstName?.message} />
+                            <InputField control={controlFirstNameLastName} label={'Last Name'} inputName={'lastName'} error={errorsFirstNameLastName.lastName?.message} />
                             <div className="flex flex-row justify-center items-center gap-3 my-3">
-                                <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => reset()} />
+                                <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetFirstNameLastName()} />
+                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => {}} loading={loading} />
+                            </div>
+                        </form>
+                        <form onSubmit={handleSubmitUserName(onSubmitUpdateUserName)}>
+                            {/* given diferent inputName for separately working */}
+                            <InputField control={controlUserName} label={'User Name'} inputName={'userName'} error={errorsUserName.firstName?.message} />
+                            <div className="flex flex-row justify-center items-center gap-3 my-3">
+                                <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetUserName()} />
                                 <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => {}} loading={loading} />
                             </div>
                         </form>
