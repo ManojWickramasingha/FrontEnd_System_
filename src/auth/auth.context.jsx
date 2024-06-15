@@ -20,7 +20,8 @@ import {
     PATH_AFTER_LOGIN_USER,
     PATH_AFTER_REGISTER,
     PATH_AFTER_LOGOUT,
-    REGISTER_URL
+    REGISTER_URL,
+    UPDATE_FIRSTNAME_LASTNAME
 } from '../utils/globalConfig';
 
 // We need a reducer function for useReducer hook
@@ -39,6 +40,14 @@ const authReducer = (state,action) => {
             isAuthenticated: false,
             isAuthLoading: false,
             user: undefined,
+        }
+    }
+    if(action.type == 'UpdateFirstNameLastName'){
+        return {
+            ...state,
+            isAuthenticated: true,
+            isAuthLoading: false,
+            user: action.payload,
         }
     }
     return state;
@@ -141,6 +150,25 @@ const AuthContextProvider = ({ children }) => {
         navigate(PATH_AFTER_LOGOUT);
     },[]);
 
+    // updateFistNameLastName Method
+    const updateFirstNameLastName = useCallback(async(userName, firstName, lastName) =>{
+        const response = await axiosInstance.put(UPDATE_FIRSTNAME_LASTNAME, {
+            userName,
+            firstName,
+            lastName
+        });
+
+        toast.success('First Name & Last Name successfully updated');
+
+        const { newToken, userInfo } = response.data;
+        setSession(newToken);
+        dispatch({
+            type: 'UpdateFirstNameLastName',
+            payload: userInfo
+        });
+        
+    },[]);
+
     // We create an object for values of context provider
     // This will keep our codes more readable
     const valuesObject = {
@@ -150,6 +178,7 @@ const AuthContextProvider = ({ children }) => {
         register,
         login,
         logout,
+        updateFirstNameLastName,
     };
 
     return ( <AuthContext.Provider value={valuesObject}>{children}</AuthContext.Provider> )

@@ -11,11 +11,11 @@ import { UPDATE_FIRSTNAME_LASTNAME } from "../../../utils/globalConfig";
 import toast from "react-hot-toast";
 
 const UserSettingPage = () => {
-    const { user } = useAuth();
+    const { user, updateFirstNameLastName } = useAuth();
     const [loading, setLoading] = useState(false);
 
     //
-    const updateFirstNameLastName = Yup.object().shape({
+    const updateFirstNameLastName_ = Yup.object().shape({
         firstName: Yup.string()
             .required('First Name is required'),
         lastName: Yup.string()
@@ -29,7 +29,7 @@ const UserSettingPage = () => {
         formState: { errors },
         reset
     } = useForm({
-        resolver: yupResolver(updateFirstNameLastName),
+        resolver: yupResolver(updateFirstNameLastName_),
         defaultValues: {
             firstName: '',
             lastName: ''
@@ -40,15 +40,9 @@ const UserSettingPage = () => {
     const onSubmitUpdateFirstNameLastName = async(submittedData) => {
         try{
             setLoading(true);
-            const updateFirstNameLastName = {
-                userName: user.userName,
-                firstName: submittedData.firstName,
-                lastName: submittedData.lastName
-            }
-            const response = await axiosInstance.put(UPDATE_FIRSTNAME_LASTNAME, updateFirstNameLastName);
-            console.log(response);
+            await updateFirstNameLastName(user.userName, submittedData.firstName, submittedData.lastName);
+            // console.log(response);
             setLoading(false);
-            toast.success('First Name & Last Name successfully updated');
         } catch(error){
             setLoading(false);
             reset()
