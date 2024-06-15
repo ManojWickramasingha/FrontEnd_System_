@@ -6,8 +6,6 @@ import Button from "../../../components/general/Button";
 import { useState } from "react";
 import Spinner from "../../../components/general/Spinner";
 import useAuth from '../../../hooks/useAuth.hook';
-import axiosInstance from "../../../utils/axiosInstance";
-import { UPDATE_FIRSTNAME_LASTNAME } from "../../../utils/globalConfig";
 import toast from "react-hot-toast";
 
 const UserSettingPage = () => {
@@ -61,15 +59,15 @@ const UserSettingPage = () => {
     return (
         <div className='pageTemplate2'>
             <h1 className='text-3xl font-bold'>Setting</h1>
-            <div className="pageTemplate3">
-                <div className="grid grid-cols-2">
-                    <div className=""></div>
-                    <div className="">
+            <div className="pageTemplate3 items-stretch">
+                <div className="grid grid-cols-3">
+                    <div className="col-span-1"></div>
+                    <div className="col-span-2">
                         <form onSubmit={handleSubmit(onSubmitUpdateFirstNameLastName)}>
                             {/* given diferent inputName for separately working */}
                             <InputField control={control} label={'First Name'} inputName={'firstName'} error={errors.firstName?.message} />
                             <InputField control={control} label={'Last Name'} inputName={'lastName'} error={errors.lastName?.message} />
-                            <div className="">
+                            <div className="flex flex-row justify-center items-center gap-3 my-3">
                                 <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => reset()} />
                                 <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => {}} loading={loading} />
                             </div>
