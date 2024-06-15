@@ -1,9 +1,88 @@
-import React from 'react'
+import { useForm } from "react-hook-form"
+import InputField from "../../../components/general/InputField"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as Yup from 'yup';
+import Button from "../../../components/general/Button";
+import { useState } from "react";
+import Spinner from "../../../components/general/Spinner";
+import useAuth from '../../../hooks/useAuth.hook';
+import axiosInstance from "../../../utils/axiosInstance";
+import { UPDATE_FIRSTNAME_LASTNAME } from "../../../utils/globalConfig";
+import toast from "react-hot-toast";
 
 const UserSettingPage = () => {
+    const { user } = useAuth();
+    const [loading, setLoading] = useState(false);
+
+    //
+    const updateFirstNameLastName = Yup.object().shape({
+        firstName: Yup.string()
+            .required('First Name is required'),
+        lastName: Yup.string()
+            .required('Last Name is reqiured'),
+    });
+
+    // ----
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+        reset
+    } = useForm({
+        resolver: yupResolver(updateFirstNameLastName),
+        defaultValues: {
+            firstName: '',
+            lastName: ''
+        }
+    })
+
+    // ----
+    const onSubmitUpdateFirstNameLastName = async(submittedData) => {
+        try{
+            setLoading(true);
+            const updateFirstNameLastName = {
+                userName: user.userName,
+                firstName: submittedData.firstName,
+                lastName: submittedData.lastName
+            }
+            const response = await axiosInstance.put(UPDATE_FIRSTNAME_LASTNAME, updateFirstNameLastName);
+            console.log(response);
+            setLoading(false);
+            toast.success('First Name & Last Name successfully updated');
+        } catch(error){
+            setLoading(false);
+            reset()
+            toast.error('An Error occurred. Please contact admin');
+        }
+    }
+
+
+    // ----
+    if(loading){
+        return <div className="w-full">
+            <Spinner />
+        </div>
+    }
+
     return (
         <div className='pageTemplate2'>
             <h1 className='text-3xl font-bold'>Setting</h1>
+            <div className="pageTemplate3">
+                <div className="grid grid-cols-2">
+                    <div className=""></div>
+                    <div className="">
+                        <form onSubmit={handleSubmit(onSubmitUpdateFirstNameLastName)}>
+                            {/* given diferent inputName for separately working */}
+                            <InputField control={control} label={'First Name'} inputName={'firstName'} error={errors.firstName?.message} />
+                            <InputField control={control} label={'Last Name'} inputName={'lastName'} error={errors.lastName?.message} />
+                            <div className="">
+                                <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => reset()} />
+                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => {}} loading={loading} />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

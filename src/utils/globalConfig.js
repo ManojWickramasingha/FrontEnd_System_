@@ -12,6 +12,7 @@ export const CREATE_MESSAGES_URL = 'https://localhost:7026/api/Messages/create';
 export const MY_MESSAGE_URL = 'https://localhost:7026/api/Messages/mine';
 export const LOGS_URL = 'https://localhost:7026/api/Log';
 export const MY_LOGS_URL = 'https://localhost:7026/api/Log/mine';
+export const UPDATE_FIRSTNAME_LASTNAME = 'https://localhost:7026/updateFirstLatName'
 
 // Auth Routes
 export const PATH_AFTER_REGISTER = PATH_PUBLIC.login;
