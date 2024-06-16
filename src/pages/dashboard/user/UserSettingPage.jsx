@@ -93,7 +93,18 @@ const UserSettingPage = () => {
             <h1 className='text-3xl font-bold'>Setting</h1>
             <div className="pageTemplate3 items-stretch">
                 <div className="grid grid-cols-3">
-                    <div className="col-span-1"></div>
+                    <div className="col-span-1">
+                        <form>
+                            <div className="w-full flex justify-center">
+                                <img src="https://th.bing.com/th/id/R.13b51ac382a5f8d7a535631ee300e835?rik=jw%2fJuxTP2zNELQ&pid=ImgRaw&r=0" 
+                                    className="h-[220px] w-[220px] rounded-full object-cover border-8" />
+                            </div>
+                            <div className="w-full flex justify-center gap-4 mt-3">
+                                <Button variant={'secondary'} type={'submit'} label={'Update'} onClick={() => {}} loading={loading} />
+                                <Button variant={'primary'} type={'submit'} label={'Delete'} onClick={() => {}} loading={loading} />
+                            </div>
+                        </form>
+                    </div>
                     <div className="col-span-2">
                         <form onSubmit={handleSubmitFirstNameLastName(onSubmitUpdateFirstNameLastName)}>
                             {/* given diferent inputName for separately working */}
@@ -106,7 +117,7 @@ const UserSettingPage = () => {
                         </form>
                         <form onSubmit={handleSubmitUserName(onSubmitUpdateUserName)}>
                             {/* given diferent inputName for separately working */}
-                            <InputField control={controlUserName} label={'User Name'} inputName={'userName'} error={errorsUserName.firstName?.message} />
+                            <InputField control={controlUserName} label={'User Name'} inputName={'userName'} error={errorsUserName.userName?.message} />
                             <div className="flex flex-row justify-center items-center gap-3 my-3">
                                 <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetUserName()} />
                                 <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => {}} loading={loading} />
