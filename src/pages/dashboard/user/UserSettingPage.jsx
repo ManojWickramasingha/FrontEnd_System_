@@ -9,7 +9,7 @@ import useAuth from '../../../hooks/useAuth.hook';
 import toast from "react-hot-toast";
 
 const UserSettingPage = () => {
-    const { user, updateFirstNameLastName } = useAuth();
+    const { user, updateFirstNameLastName, updateUserName } = useAuth();
     const [loading, setLoading] = useState(false);
 
     // ----
@@ -62,13 +62,23 @@ const UserSettingPage = () => {
             setLoading(false);
         } catch(error){
             setLoading(false);
-            reset()
+            resetFirstNameLastName()
             toast.error('An Error occurred. Please contact admin');
         }
-    }
+    };
 
     // ----
-    const onSubmitUpdateUserName = () => {};
+    const onSubmitUpdateUserName = async(submittedData) => {
+        try{
+            setLoading(true);
+            await updateUserName(user.userName, submittedData.userName);
+            setLoading(false);
+        }catch(error){
+            setLoading(false);
+            resetUserName();
+            toast.error('An Error occured. Please contact admin');
+        }
+    };
 
 
     // ----
