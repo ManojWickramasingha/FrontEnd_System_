@@ -6,12 +6,28 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Typography from "@mui/material/Typography";
 import moment from "moment";
+import axios from "axios";
 
-const ReminderDetail = ({ event, open, setOpen, onDelete }) => {
+const ReminderDetail = ({ event, open, setOpen, onDelete, events, setEvents, setCount }) => {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleDelete = () => {
+   
+    axios.delete(`http://localhost:5296/api/Reminders/`+`${event.id}`)
+  .then(response => {
+    console.log("response")
+  })
+  .catch(error => {
+    
+  })
+  
+  handleClose();
+  setCount(count=>count+1);
+  //  setEvents(events.filter((event) => event !== selectedEvent));
 
+    
+  };
   return (
     <Dialog
       open={open}
@@ -37,10 +53,9 @@ const ReminderDetail = ({ event, open, setOpen, onDelete }) => {
           Close
         </Button>
         <Button
-          onClick={() => {
-            onDelete();
-            handleClose();
-          }}
+          onClick={
+            handleDelete
+          }
           sx={{ fontWeight: "bold" }}
           color="error"
         >

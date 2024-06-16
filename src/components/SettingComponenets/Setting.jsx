@@ -1,179 +1,291 @@
 import React, { useState } from 'react';
-import { Container, TextField, Button, FormControl, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Switch, Typography, Snackbar, Alert, Card, CardContent, CardHeader, Box, Tooltip, CircularProgress } from '@mui/material';
-import { Info as InfoIcon, Save as SaveIcon } from '@mui/icons-material';
+import { Container, Typography, Grid, TextField, FormControl, InputLabel, Select, MenuItem, Button, Box, FormControlLabel, Radio, RadioGroup, FormLabel, Switch, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 
 const Settings = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    currency: 'USD',
-    notifications: false,
-    language: 'en',
-    theme: 'light',
-  });
-
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
-  };
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Handle form submission logic
+    console.log('Form submitted');
+  };
 
-    // Basic validation
-    if (!formData.username || !formData.email || !formData.password) {
-      setError('All fields are required');
-      return;
-    }
+  const handleDeactivate = () => {
+    // Handle account deactivation logic
+    console.log('Account deactivated');
+    setOpen(false);
+  };
 
-    // Simulate a loading state
-    setLoading(true);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    // Reset error and show success message after a delay
-    setTimeout(() => {
-      setError('');
-      setOpenSnackbar(true);
-      setLoading(false);
-      console.log('Form Data:', formData);
-    }, 2000);
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
-      <form onSubmit={handleSubmit}>
-        <Card variant="outlined" sx={{ mb: 2 }}>
-          <CardHeader title="User Information" />
-          <CardContent>
-            <TextField
-              label="Username"
-              name="username"
-              fullWidth
-              margin="normal"
-              value={formData.username}
-              onChange={handleChange}
-              error={!!error && !formData.username}
-              helperText={!!error && !formData.username ? 'Username is required' : ''}
-            />
-            <TextField
-              label="Email"
-              name="email"
-              type="email"
-              fullWidth
-              margin="normal"
-              value={formData.email}
-              onChange={handleChange}
-              error={!!error && !formData.email}
-              helperText={!!error && !formData.email ? 'Email is required' : ''}
-            />
-            <TextField
-              label="Password"
-              name="password"
-              type="password"
-              fullWidth
-              margin="normal"
-              value={formData.password}
-              onChange={handleChange}
-              error={!!error && !formData.password}
-              helperText={!!error && !formData.password ? 'Password is required' : ''}
-            />
-          </CardContent>
-        </Card>
-        
-        <Card variant="outlined" sx={{ mb: 2 }}>
-          <CardHeader title="Preferences" />
-          <CardContent>
-            <FormControl fullWidth margin="normal">
-              <InputLabel>Currency</InputLabel>
-              <Select
-                name="currency"
-                value={formData.currency}
-                onChange={handleChange}
-              >
-                <MenuItem value="USD">USD</MenuItem>
-                <MenuItem value="EUR">EUR</MenuItem>
-                <MenuItem value="GBP">GBP</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl fullWidth margin="normal">
-              <InputLabel>Language</InputLabel>
-              <Select
-                name="language"
-                value={formData.language}
-                onChange={handleChange}
-              >
-                <MenuItem value="en">English</MenuItem>
-                <MenuItem value="es">Spanish</MenuItem>
-                <MenuItem value="fr">French</MenuItem>
-                <MenuItem value="de">German</MenuItem>
-                <MenuItem value="zh">Chinese</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl fullWidth margin="normal">
-              <InputLabel>Theme</InputLabel>
-              <Select
-                name="theme"
-                value={formData.theme}
-                onChange={handleChange}
-              >
-                <MenuItem value="light">Light</MenuItem>
-                <MenuItem value="dark">Dark</MenuItem>
-              </Select>
-            </FormControl>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={formData.notifications}
-                    onChange={handleChange}
-                    name="notifications"
-                    color="primary"
-                  />
-                }
-                label={
-                  <Tooltip title="Enable or disable notifications" arrow>
-                    <span>Enable Notifications <InfoIcon fontSize="small" /></span>
-                  </Tooltip>
-                }
+    <Container maxWidth="md">
+      {/* Personal Information Settings */}
+      <Box mb={3}>
+        <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
+          Personal Information Details
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="First Name"
+                variant="outlined"
+                fullWidth
+                required
+                // Add value and onChange handlers
               />
-            </FormGroup>
-          </CardContent>
-        </Card>
-
-        {error && (
-          <Typography variant="body2" color="error" gutterBottom>
-            {error}
-          </Typography>
-        )}
-
-        <Box mt={2} display="flex" justifyContent="flex-end" alignItems="center">
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            startIcon={loading ? <CircularProgress size={24} /> : <SaveIcon />}
-            disabled={loading}
-          >
-            {loading ? 'Saving...' : 'Save Settings'}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Last Name"
+                variant="outlined"
+                fullWidth
+                required
+                // Add value and onChange handlers
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="Email"
+                variant="outlined"
+                fullWidth
+                required
+                type="email"
+                // Add value and onChange handlers
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="Phone Number"
+                variant="outlined"
+                fullWidth
+                // Add value and onChange handlers
+              />
+            </Grid>
+          </Grid>
+          <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px', backgroundColor: "#07271F" }}>
+            Save
           </Button>
+        </form>
+      </Box>
+
+      {/* Account Settings */}
+      <Box mb={3}>
+        <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
+          Account Settings
+        </Typography>
+
+        {/* Change Username */}
+        <Box mb={3}>
+          <Typography variant="h6" gutterBottom>
+            Change Username
+          </Typography>
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  label="Current Username"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  // Add value and onChange handlers
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="New Username"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  // Add value and onChange handlers
+                />
+              </Grid>
+            </Grid>
+            <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px', backgroundColor: "#07271F" }}>
+              Change Username
+            </Button>
+          </form>
         </Box>
-      </form>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={() => setOpenSnackbar(false)}
-      >
-        <Alert onClose={() => setOpenSnackbar(false)} severity="success">
-          Settings saved successfully!
-        </Alert>
-      </Snackbar>
+
+        {/* Change Password */}
+        <Box mb={3}>
+          <Typography variant="h6" gutterBottom>
+            Change Password
+          </Typography>
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  label="Current Password"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  type="password"
+                  // Add value and onChange handlers
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="New Password"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  type="password"
+                  // Add value and onChange handlers
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Confirm New Password"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  type="password"
+                  // Add value and onChange handlers
+                />
+              </Grid>
+            </Grid>
+            <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px', backgroundColor: "#07271F" }}>
+              Change Password
+            </Button>
+          </form>
+        </Box>
+      </Box>
+
+      {/* General Settings */}
+      <Box mb={3}>
+        <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
+          General Settings
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel>Language</InputLabel>
+                <Select
+                  // Add value and onChange handlers
+                  label="Language"
+                >
+                  <MenuItem value="en">English</MenuItem>
+                  <MenuItem value="si">සිංහල</MenuItem>
+                  {/* Add more languages */}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel>Currency</InputLabel>
+                <Select
+                  // Add value and onChange handlers
+                  label="Currency"
+                >
+                  <MenuItem value="usd">USD - United States Dollar</MenuItem>
+                  <MenuItem value="eur">EUR - Euro</MenuItem>
+                  <MenuItem value="lkr">LKR - Lankan Rupees</MenuItem>
+                  <MenuItem value="inr">INR - Indian Rupees</MenuItem>
+                  {/* Add more currencies */}
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
+          <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px', backgroundColor: "#07271F" }}>
+            Save
+          </Button>
+        </form>
+      </Box>
+
+      {/* Notification Settings */}
+      <Box mb={3}>
+        <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
+          Notification Settings
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={<Switch name="emailNotifications" />}
+                label="Email Notifications"
+                // Add value and onChange handlers
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={<Switch name="smsNotifications" />}
+                label="SMS Notifications"
+                // Add value and onChange handlers
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={<Switch name="pushNotifications" />}
+                label="Push Notifications"
+                // Add value and onChange handlers
+              />
+            </Grid>
+          </Grid>
+          <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px', backgroundColor: "#07271F" }}>
+            Save
+          </Button>
+        </form>
+      </Box>
+
+      {/* Deactivate Account */}
+      <Box mb={3} mt={5}>
+        <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
+          Deactivate Account
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Why are you deactivating?</FormLabel>
+            <RadioGroup
+              aria-label="deactivationReason"
+              name="deactivationReason"
+              // Add value and onChange handlers
+            >
+              <FormControlLabel value="privacyConcerns" control={<Radio />} label="Privacy Concerns" />
+              <FormControlLabel value="notUseful" control={<Radio />} label="Not Useful" />
+              <FormControlLabel value="other" control={<Radio />} label="Other" />
+            </RadioGroup>
+            <TextField
+              label="Please specify (if 'Other')"
+              variant="outlined"
+              fullWidth
+              // Add value and onChange handlers
+              style={{ marginTop: '10px' }}
+            />
+          </FormControl>
+        </form>
+      </Box>
+      <Box mb={3}>
+        <Button variant="contained" color="secondary" style={{ backgroundColor: '#faeae8', color: 'red' }} onClick={handleClickOpen}>
+          Deactivate Account
+        </Button>
+      </Box>
+
+      {/* Deactivation Confirmation Dialog */}
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle sx={{ fontWeight: "bold" }}>{"Deactivate Account"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to deactivate your account? This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" style={{ backgroundColor: '#f7f0f0', textTransform: 'none', fontSize: '16px', color: '#07271F'}}>
+            No
+          </Button>
+          <Button onClick={handleDeactivate} color="secondary" style={{ backgroundColor: '#f7f0f0', textTransform: 'none', fontSize: '16px', color: 'red'}}>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };
