@@ -14,7 +14,6 @@ import { ADD_USER_IMAGE } from '../../../utils/globalConfig';
 const UserSettingPage = () => {
     const { user, updateFirstNameLastName, updateUserName } = useAuth();
     const [loading, setLoading] = useState(false);
-    // const [imageFile, setImageFile] = useState(null);
 
     // ----
     const updateFirstNameLastName_ = Yup.object().shape({
@@ -86,51 +85,26 @@ const UserSettingPage = () => {
 
     //-----
     const handleFileChange = async(event) => {
-        // if (!imageFile) {
-        //     toast.error('please select an image');
-        //     return;
-        // }
-
-        let formData = new FormData();
-        // formData.append('userName', user.userName);
-        formData.append('ImageFile', event.target.files[0]); // selectedFile should be the file object
-
-        for (let [key, value] of formData.entries()) {
-            console.log(key, value);
+        if (!event.target.files[0]) {
+            toast.error('please select an image');
+            return;
         }
 
-        // const submitedData = {
-        //     userName: user.userName,
-        //     file: imageFile
-        // }
-        // console.log(submitedData);
+        let formData = new FormData();
+        formData.append('ImageFile', event.target.files[0]); // selectedFile should be the file object
 
         try {
             setLoading(true);
-            const response = await axiosInstance.post(ADD_USER_IMAGE, formData);
+            await axiosInstance.post(ADD_USER_IMAGE, formData);
             setLoading(false);
             toast.success('user image added sucessfully');
         } catch (error) {
             setLoading(false);
-            if (error.response && error.response.status === 400) {
-                toast.success('fuck');
-            }
             toast.error('An error occurred. Please contact admin');
         } finally {
-            // setImageFile(null);
+            setImageFile(null);
         }
     };
-
-    // -----
-    // const handleFileChange = async (event) => {
-    //     const selectedFile = event.target.files[0];
-    //     setImageFile(selectedFile);
-    // };
-
-    // useEffect(() => {
-    //     AddUserImage();
-    // }, [imageFile]);
-
 
     // ----
     if (loading) {
