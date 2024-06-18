@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import AdminSettings from '../../../components/SettingComponenets/adminsetting/AdminSetting';
 
 const AdminSettingPage = () => {
     return (
@@ -8,4 +9,4 @@ const AdminSettingPage = () => {
     )
 }
 
-export default AdminSettingPage
+export default AdminSettingPage;
