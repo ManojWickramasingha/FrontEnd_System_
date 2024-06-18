@@ -12,16 +12,25 @@ const FormContainer = styled(Box)({
 const BudgetForm = ({ onCreateBudget }) => {
   const [budgetName, setBudgetName] = useState("");
   const [amount, setAmount] = useState("");
+  const [errors, setErrors] = useState({ budgetName: false, amount: false });
 
   const handleCreateBudget = () => {
-    onCreateBudget({ budgetName, amount: parseFloat(amount) });
-    setBudgetName("");
-    setAmount("");
+    if (budgetName === "" || amount === "") {
+      setErrors({
+        budgetName: budgetName === "",
+        amount: amount === "",
+      });
+    } else {
+      onCreateBudget({ budgetName, amount: parseFloat(amount) });
+      setBudgetName("");
+      setAmount("");
+      setErrors({ budgetName: false, amount: false });
+    }
   };
 
   return (
     <FormContainer>
-      <Typography variant="h6">Create budget</Typography>
+      <Typography variant="h5">Create budget</Typography>
       <TextField
         label="Budget Name"
         variant="outlined"
@@ -30,6 +39,8 @@ const BudgetForm = ({ onCreateBudget }) => {
         value={budgetName}
         onChange={(e) => setBudgetName(e.target.value)}
         placeholder="e.g., Groceries"
+        error={errors.budgetName}
+        helperText={errors.budgetName ? "Budget Name is required" : ""}
       />
       <TextField
         label="Amount"
@@ -39,6 +50,8 @@ const BudgetForm = ({ onCreateBudget }) => {
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
         placeholder="e.g., $350"
+        error={errors.amount}
+        helperText={errors.amount ? "Amount is required" : ""}
       />
       <Button
         style={{

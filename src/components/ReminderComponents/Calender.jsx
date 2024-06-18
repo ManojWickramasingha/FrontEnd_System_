@@ -1,52 +1,79 @@
+import React, { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { useState } from "react";
 import ReminderSet from "./ReminderSet";
-
+import ReminderDetail from "./ReminderDetail";
+import { Dialog, DialogTitle, DialogContent, Button } from "@mui/material";
+import axios from "axios";
 
 const localizer = momentLocalizer(moment);
 
-const myEventsList = [
-  // {
-  //   start: moment("2024-02-27T14:00:00").toDate(),
-  //   end: moment("2024-02-27T14:00:00").toDate(),
-  //   title: "Birthday",
-  // },
-  {
-    start: moment("2024-04-12T14:00:00").toDate(),
-    end: moment("2024-04-12T14:00:00").toDate(),
-    title: "name",
-  },
-  {
-    start: moment("2024-02-01T14:00:00").toDate(),
-    end: moment("2024-02-01T14:00:00").toDate(),
-    title: "special event",
-  },
-  {
-    start: moment("2024-04-14T14:00:00").toDate(),
-    end: moment("2024-04-14T14:00:00").toDate(),
-    title: "Birthday",
-  }
-  // {
-  //   start: moment("Feb 15 2024").toDate(),
-  //   end: moment("Feb 15 2024").toDate(),
-  //   title: "special event",
-  // },
-];
 
-const MyCalendar = (props) => {
-  const [rdate,setrdate] = useState("");
-  const [open, setOpen] = useState(false);
 
-  const handlePopup = (event) => {
-    const selectedDate = moment(event.start).format('YYYY-MM-DD');
-    console.log(selectedDate);
-    setrdate(selectedDate)
-    setOpen(true);
-    console.log("This is open popup");
-  
+
+const MyCalendar = () => {
+  const [events, setEvents] = useState([]);
+  const [rdate, setrdate] = useState(new Date());
+  const [openSet, setOpenSet] = useState(false);
+  const [openDetail, setOpenDetail] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [count, setCount] = useState(0);
+
+  const [tempevents, Settempevents] = useState([]);
+
+  const handlePopup = ({ start }) => {
+    const selectedDate = moment(start).format('YYYY-MM-DD');
+    setrdate(selectedDate);
+    setOpenSet(true);
   };
+
+  const handleEventClick = (event) => {
+    setSelectedEvent(event);
+    setOpenDetail(true);
+  };
+
+  const handleDelete = () => {
+    setEvents(events.filter(event => event !== selectedEvent));
+    setOpenDetail(false);
+  };
+
+  const addEvent = (newEvent) => {
+    setEvents(prevEvents => [...prevEvents, newEvent]);
+    setOpenSet(false);
+  };
+  useEffect(() => {
+    document.body.style.margin = "0";
+    axios
+      .get(
+        "http://localhost:5296/api/Reminders",
+      ).then((response) => {
+        const data = response.data;
+        console.log(data);
+        
+        const newItems = [];
+        for (let i = 0; i < data.length; i++) {
+          const newEvent = {
+            id: data[i].reminderId,
+            start: data[i].reminderstartDate,
+            end: data[i].reminderendDate,
+            title: data[i].reminderName,
+            amount: data[i].reminderAmount,
+            description: data[i].reminderDescription,
+
+          };
+          newItems.push(newEvent);
+          console.log("newevent" ,newEvent);
+      }
+      setEvents(newItems);
+      })
+      .catch((error) => {
+        console.error("Error fetching appointments:", error);
+      });
+  }, [count]);
+
+
+
   return (
     <div>
       <style>
@@ -61,17 +88,28 @@ const MyCalendar = (props) => {
       </style>
       <Calendar
         localizer={localizer}
-        events={myEventsList}
+        events={events}
         startAccessor="start"
         endAccessor="end"
         selectable={true}
         onSelectSlot={handlePopup}
+        onSelectEvent={handleEventClick}
         style={{ height: 600 }}
         views={{ month: true }}
       />
 
-      <ReminderSet rdate={rdate} open={open} setOpen={setOpen} />
+      <ReminderSet rdate={rdate} open={openSet} setOpen={setOpenSet} addEvent={addEvent} setCount={setCount} setOpenSet={setOpenSet} />
+      <ReminderDetail
+        event={selectedEvent}
+        open={openDetail}
+        setOpen={setOpenDetail}
+        onDelete={handleDelete}
+        events={events}
+        setEvents={setEvents}
+        setCount={setCount}
+      />
     </div>
   );
 };
+
 export default MyCalendar;
