@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import { DialogContentText } from "@mui/material";
 import moment from "moment";
 import axios from "axios";
+import { toast } from 'react-hot-toast';
 
 const ReminderSet = ({ open, setOpen, rdate, addEvent, setCount, setOpenSet }) => {
   const handleClose = () => {
@@ -55,8 +56,10 @@ const ReminderSet = ({ open, setOpen, rdate, addEvent, setCount, setOpenSet }) =
       );
       handleClose();
       setCount(count=>count+1)
+      toast.success('Reminder Set successfully');
     } catch (err) {
       console.log(err);
+      toast.error('An Error occurred.');
     }
     setOpenSet(false);
   //  //addEvent(newEvent);

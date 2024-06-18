@@ -7,6 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import Typography from "@mui/material/Typography";
 import moment from "moment";
 import axios from "axios";
+import {toast} from 'react-hot-toast';
 
 const ReminderDetail = ({ event, open, setOpen, onDelete, events, setEvents, setCount }) => {
   const handleClose = () => {
@@ -15,11 +16,13 @@ const ReminderDetail = ({ event, open, setOpen, onDelete, events, setEvents, set
   const handleDelete = () => {
    
     axios.delete(`http://localhost:5296/api/Reminders/`+`${event.id}`)
+
   .then(response => {
     console.log("response")
+    toast.success('Reminder Deleted successfully');
   })
   .catch(error => {
-    
+    toast.error('An Error occurred.');
   })
   
   handleClose();
