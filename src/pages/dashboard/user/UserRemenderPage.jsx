@@ -1,15 +1,14 @@
-import React from "react";
-import MyCalendar from "../../../components/ReminderComponents/Calender";
+import MyCalendar from "../../../components/ReminderComponents/Calender"
 
 const UserRemenderPage = () => {
-  return (
-    <div className="pageTemplate2">
-      <h1 style={{ fontSize: '30px', fontWeight: 'bold' }}>Reminders</h1>
-      <div className="calender">
-        <MyCalendar />
-      </div>
-    </div>
-  );
-};
+    return (
+        <div className='pageTemplate2'>
+            <h1 className='text-3xl font-bold'>Remender</h1>
+            <div className="calender">
+                <MyCalendar />
+            </div>
+        </div>
+    )
+}
 
-export default UserRemenderPage;
+export default UserRemenderPage

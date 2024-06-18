@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Controller } from 'react-hook-form';
 
 const UsernamesComboBox = ({usernames = [], control, name, error}) => {
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState();
     const [showComboBox, setShowComboBox] = useState(false);
 
     const renderTopRow = () => {

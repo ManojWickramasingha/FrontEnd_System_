@@ -4,29 +4,16 @@ import { AiOutlineHome } from 'react-icons/ai';
 import { FiLock, FiUnlock } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { PATH_DASHBOARD_ADMIN, PATH_DASHBOARD_USER, PATH_PUBLIC } from '../../routes/paths';
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { RiAdminFill } from "react-icons/ri";
 import { FaUser } from "react-icons/fa6";
+import ModeContext from '../../auth/mode.context';
 
 const Header = () => {
     const { isAuthenticated, isAuthLoading, user, logout } = useAuth();
     const navigate = useNavigate();
-    const [mode, setMode] = useState(() => {
-        // Check if mode is stored in local storage
-        const storedMode = localStorage.getItem('mode');
-        // Return stored mode if exists, otherwise default to 'user'
-        return storedMode ? storedMode : 'user';
-    });
 
-    // Update local storage when mode changes
-    useEffect(() => {
-        localStorage.setItem('mode', mode);
-    }, [mode]);
-
-    const toggleMode = () => {
-        // Toggle mode between 'user' and 'admin'
-        setMode(preMode => (preMode == 'user' ? 'admin' : 'user'));
-    };
+    const { mode, toggleMode } = useContext(ModeContext);
 
     const userRolesLabelCreator = () => {
         if (user && user.roles) {
@@ -36,7 +23,7 @@ const Header = () => {
     };
 
     return (
-        <div className='flex justify-between items-center bg-[#07271f] h-12 px-4 '>
+        <div className='z-10 fixed w-full flex justify-between items-center bg-[#07271f] h-12 px-4 '>
             <div className='flex items-center gap-4'>
                 <AiOutlineHome
                     className='w-8 h-8 text-green-400 hover:text-green-600 cursor-pointer'
@@ -44,14 +31,18 @@ const Header = () => {
                 />
                 {
                     mode == 'user' ? (
-                        <div className='flex justify-center items-center'>
-                            <ul className='flex gap-4 items-center justify-center text-[#e5fafe]'>
-                                <li className='font-semibold cursor-pointer'>Home</li>
-                                <li className='font-semibold cursor-pointer'>Services</li>
-                                <li className='font-semibold cursor-pointer'>About</li>
-                                <li className='font-semibold cursor-pointer'>Contact</li>
-                            </ul>
-                        </div>
+                        isAuthenticated ? (
+                            <div></div>
+                        ) : (
+                            <div className='flex justify-center items-center'>
+                                <ul className='flex gap-4 items-center justify-center text-[#e5fafe]'>
+                                    <li className='font-semibold cursor-pointer'>Home</li>
+                                    <li className='font-semibold cursor-pointer'>Services</li>
+                                    <li className='font-semibold cursor-pointer'>About</li>
+                                    <li className='font-semibold cursor-pointer'>Contact</li>
+                                </ul>
+                            </div>
+                        )
                     ) : (
                         <div className='flex gap-1 justify-between items-center text-[#e5fafe]'>
                             <h1 className='px-1 font-semibold border border-dashed border-green-300 rounded-lg'>
