@@ -10,13 +10,14 @@ export const PATH_DASHBOARD_USER = {
     dashboard: '/user/dashboard',
     analysis: '/user/dashboard/analysis',
     transaction: '/user/dashboard/transaction',
+    saving: '/user/dashboard/saving',
+    budget: '/user/dashboard/budget',
     report: '/user/dashboard/report',
     remender: '/user/dashboard/remender',
     organization: '/user/dashboard/organization',
     setting: '/user/dashboard/setting',
     sendMessage: '/user/dashboard/send-message',
     inbox: '/user/dashboard/inbox',
-    myLogs: '/user/dashboard/my-logs',
 }
 
 export const PATH_DASHBOARD_ADMIN = {
@@ -28,4 +29,6 @@ export const PATH_DASHBOARD_ADMIN = {
     sendMessage: '/admin/dashboard/send-message',
     inbox: '/admin/dashboard/inbox',
     myLogs: '/admin/dashboard/my-logs',
+    remender: '/admin/dashboard/remender',
+    setting: '/admin/dashboard/setting'
 }

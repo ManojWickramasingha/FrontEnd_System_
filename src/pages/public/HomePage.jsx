@@ -36,7 +36,7 @@ const HomePage = () => {
     }
 
     return (
-        <div className='w-full min-h-[calc(100vh-48px)] flex flex-col justify-center items-center mx-auto'>
+        <div className='w-full min-h-[calc(100vh-48px)] flex flex-col justify-center items-center mx-auto mt-12'>
             <ScrollToTop />
             <div className='pageTemplate5 group'>
                 {/* texture */}
@@ -133,7 +133,7 @@ const HomePage = () => {
                 </div>
             </div>
             <div className='pageTemplate4'>CONTACT</div>
-            <div className='pageTemplate5'>BOTTOM</div>
+            <div className='pageTemplate5'>Bottom</div>
         </div>
     )
 }

@@ -4,25 +4,31 @@ import AuthGuardForUser from '../auth/AuthGuardForUser';
 import AuthGuardForAdmin from '../auth/AuthGuardForAdmin';
 import Layout from '../components/layout';
 
-import AdminDashboard from '../pages/dashboard/admin/AdminDashboard';
+import AdminDashboardPage from '../pages/dashboard/admin/AdminDashboardPage';
 import AllMessagesPage from '../pages/dashboard/admin/AllMessagesPage';
-import InboxPage from '../pages/dashboard/InboxPage';
-import MyLogsPage from '../pages/dashboard/MyLogsPage';
-import SendMessagePage from '../pages/dashboard/SendMessagePage';
+import AdminInboxPage from '../pages/dashboard/admin/AdminInboxPage';
+import MyLogsPage from '../pages/dashboard/admin/MyLogsPage';
+import AdminSendMessagePage from '../pages/dashboard/admin/AdminSendMessagePage';
 import SystemLogsPage from '../pages/dashboard/admin/SystemLogsPage';
-import UserDashboard from '../pages/dashboard/user/UserDashboard';
-import AnalysisPage from '../pages/dashboard/user/Analysis';
-import TransactionPage from '../pages/dashboard/user/Transaction';
-import ReportPage from '../pages/dashboard/user/Report';
-import RemenderPage from '../pages/dashboard/user/Remender';
-import OrganizationPage from '../pages/dashboard/user/Organization';
-import SettingPage from '../pages/dashboard/user/Setting';
+import AdminRemenderPage from '../pages/dashboard/admin/AdminRemenderPage';
+import AdminSettingPage from '../pages/dashboard/admin/AdminSettingPage'
+import UserDashboardPage from '../pages/dashboard/user/UserDashboardPage';
+import UserAnalysisPage from '../pages/dashboard/user/UserAnalysisPage';
+import UserTransactionPage from '../pages/dashboard/user/UserTransactionPage';
+import UserSavingPage from '../pages/dashboard/user/UserSavingPage';
+import UserReportPage from '../pages/dashboard/user/UserReportPage';
+import UserRemenderPage from '../pages/dashboard/user/UserRemenderPage';
+import UserOrganizationPage from '../pages/dashboard/user/UserOrganizationPage';
+import UserInboxPage from '../pages/dashboard/user/UserInboxPage';
+import UserSendMessagePage from '../pages/dashboard/user/UserSendMessagePage';
+import UserSettingPage from '../pages/dashboard/user/UserSettingPage';
 import UsersManagementPage from '../pages/dashboard/admin/UsersManagementPage';
 import HomePage from '../pages/public/HomePage';
 import LoginPage from '../pages/public/LoginPage';
 import NotFoundPage from '../pages/public/NotFoundPage';
 import RegisterPage from '../pages/public/RegisterPage';
 import UnauthorizedPage from '../pages/public/UnauthorizedPage';
+import UserBudgetPage from '../pages/dashboard/user/UserBudgetPage';
 
 
 
@@ -40,26 +46,29 @@ const GlobalRouter = () => {
 
                 {/* Protected routes */}
                 <Route element={<AuthGuardForUser />}>
-                    <Route path={PATH_DASHBOARD_USER.dashboard} element={<UserDashboard />} />
-                    <Route path={PATH_DASHBOARD_USER.analysis} element={<AnalysisPage />} />
-                    <Route path={PATH_DASHBOARD_USER.transaction} element={<TransactionPage />} />
-                    <Route path={PATH_DASHBOARD_USER.report} element={<ReportPage />} />
-                    <Route path={PATH_DASHBOARD_USER.remender} element={<RemenderPage />} />
-                    <Route path={PATH_DASHBOARD_USER.organization} element={<OrganizationPage />} />
-                    <Route path={PATH_DASHBOARD_USER.setting} element={<SettingPage />} />
-                    <Route path={PATH_DASHBOARD_USER.sendMessage} element={<SendMessagePage />} />
-                    <Route path={PATH_DASHBOARD_USER.inbox} element={<InboxPage />} />
-                    <Route path={PATH_DASHBOARD_USER.myLogs} element={<MyLogsPage />} />
+                    <Route path={PATH_DASHBOARD_USER.dashboard} element={<UserDashboardPage />} />
+                    <Route path={PATH_DASHBOARD_USER.analysis} element={<UserAnalysisPage />} />
+                    <Route path={PATH_DASHBOARD_USER.transaction} element={<UserTransactionPage />} />
+                    <Route path={PATH_DASHBOARD_USER.saving} element={<UserSavingPage />} />
+                    <Route path={PATH_DASHBOARD_USER.budget} element={<UserBudgetPage />} />
+                    <Route path={PATH_DASHBOARD_USER.report} element={<UserReportPage />} />
+                    <Route path={PATH_DASHBOARD_USER.remender} element={<UserRemenderPage />} />
+                    <Route path={PATH_DASHBOARD_USER.organization} element={<UserOrganizationPage />} />
+                    <Route path={PATH_DASHBOARD_USER.setting} element={<UserSettingPage />} />
+                    <Route path={PATH_DASHBOARD_USER.sendMessage} element={<UserSendMessagePage />} />
+                    <Route path={PATH_DASHBOARD_USER.inbox} element={<UserInboxPage />} />
                 </Route>
 
                 <Route element={<AuthGuardForAdmin />}>
-                    <Route path={PATH_DASHBOARD_ADMIN.dashboard} element={<AdminDashboard />} />
+                    <Route path={PATH_DASHBOARD_ADMIN.dashboard} element={<AdminDashboardPage />} />
                     <Route path={PATH_DASHBOARD_ADMIN.usersManagement} element={<UsersManagementPage />} />
                     <Route path={PATH_DASHBOARD_ADMIN.allMessages} element={<AllMessagesPage />} />
                     <Route path={PATH_DASHBOARD_ADMIN.systemLogs} element={<SystemLogsPage />} />
-                    <Route path={PATH_DASHBOARD_ADMIN.sendMessage} element={<SendMessagePage />} />
-                    <Route path={PATH_DASHBOARD_ADMIN.inbox} element={<InboxPage />} />
+                    <Route path={PATH_DASHBOARD_ADMIN.sendMessage} element={<AdminSendMessagePage />} />
+                    <Route path={PATH_DASHBOARD_ADMIN.inbox} element={<AdminInboxPage />} />
                     <Route path={PATH_DASHBOARD_ADMIN.myLogs} element={<MyLogsPage />} />
+                    <Route path={PATH_DASHBOARD_ADMIN.remender} element={<AdminRemenderPage />} />
+                    <Route path={PATH_DASHBOARD_ADMIN.setting} element={<AdminSettingPage />} />
                 </Route>
 
             </Route>

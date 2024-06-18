@@ -12,7 +12,8 @@ import ModeContext from '../../auth/mode.context';
 const Header = () => {
     const { isAuthenticated, isAuthLoading, user, logout } = useAuth();
     const navigate = useNavigate();
-    const {mode,toggleMode} = useContext(ModeContext);
+
+    const { mode, toggleMode } = useContext(ModeContext);
 
     const userRolesLabelCreator = () => {
         if (user && user.roles) {
@@ -22,7 +23,7 @@ const Header = () => {
     };
 
     return (
-        <div className='flex justify-between items-center bg-[#07271f] h-12 px-4 '>
+        <div className='z-10 fixed w-full flex justify-between items-center bg-[#07271f] h-12 px-4 '>
             <div className='flex items-center gap-4'>
                 <AiOutlineHome
                     className='w-8 h-8 text-green-400 hover:text-green-600 cursor-pointer'
