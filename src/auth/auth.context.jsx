@@ -146,7 +146,7 @@ const AuthContextProvider = ({ children }) => {
             type: 'LOGIN',
             payload: userInfo,
         });
-        console.log("userInfo" , userInfo);
+        // console.log(userInfo.roles);
         userInfo.roles == "Admin" ? navigate(PATH_AFTER_LOGIN_ADMIN) : navigate(PATH_AFTER_LOGIN_USER);
     },[]);
 
