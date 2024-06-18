@@ -35,7 +35,7 @@ const SystemLogsPage = () => {
 
     return (
         <div className='pageTemplate2'>
-            <h1 className='text-2xl font-bold'>System Logs</h1>
+            <h1 className='text-3xl font-bold'>System Logs</h1>
             <div className='pageTemplate3 items-stretch'>
                 <div className='grid grid-cols-6 p-2 border-2 border-gray-200 rounded-lg'>
                     <span>No</span>

@@ -8,7 +8,7 @@ const UserSettingPage = () => {
           <div className="settingpage">
             <Settings />
           </div>
-        </div>
+
     )
 }
 
