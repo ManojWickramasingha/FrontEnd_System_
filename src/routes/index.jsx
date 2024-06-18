@@ -46,8 +46,6 @@ const GlobalRouter = () => {
 
                 {/* Protected routes */}
                 <Route element={<AuthGuardForUser />}>
-                   
-
                     <Route path={PATH_DASHBOARD_USER.dashboard} element={<UserDashboardPage />} />
                     <Route path={PATH_DASHBOARD_USER.analysis} element={<UserAnalysisPage />} />
                     <Route path={PATH_DASHBOARD_USER.transaction} element={<UserTransactionPage />} />
