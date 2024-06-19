@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Box, Typography, MenuItem } from '@mui/material';
 import { styled } from '@mui/system';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const FormContainer = styled(Box)({
   border: '1px dashed #ccc',
@@ -9,13 +11,13 @@ const FormContainer = styled(Box)({
   marginBottom: '20px'
 });
 
-const ExpenseForm = ({ onAddExpense, budgetCategories }) => {
+const ExpenseForm = ({ onAddExpense, budgetCategories,budget,getall }) => {
   const [expenseName, setExpenseName] = useState('');
   const [amount, setAmount] = useState('');
-  const [budgetCategory, setBudgetCategory] = useState('');
+  const [budgetCategory, setBudgetCategory] = useState(0);
   const [errors, setErrors] = useState({ expenseName: false, amount: false, budgetCategory: false });
 
-  const handleAddExpense = () => {
+  const handleAddExpense = async() => {
     if (expenseName === "" || amount === "" || budgetCategory === "") {
       setErrors({
         expenseName: expenseName === "",
@@ -23,16 +25,28 @@ const ExpenseForm = ({ onAddExpense, budgetCategories }) => {
         budgetCategory: budgetCategory === "",
       });
     } else {
-      onAddExpense({ expenseName, amount: parseFloat(amount), budgetCategory });
-      setExpenseName('');
-      setAmount('');
-      setBudgetCategory('');
-      setErrors({ expenseName: false, amount: false, budgetCategory: false });
+      try {
+        var response = await axios.post("https://localhost:7026/api/BExpenses",{
+          bExpenseName: expenseName,
+          bExpenseAmount: amount,
+          budgetId: budgetCategory,
+        });
+        console.log(response.data);
+        setExpenseName("");
+        setAmount(0);
+        setBudgetCategory(0);
+        getall();
+        toast.success("Reminder Set successfully");
+      } catch (err) {
+        console.log(err);
+        toast.error("An Error occurred.");
+      }
     }
   };
 
   return (
     <FormContainer>
+      {budgetCategory}
       <Typography variant="h6">Add New Expense</Typography>
       <TextField
         label="Expense Name"
@@ -67,9 +81,9 @@ const ExpenseForm = ({ onAddExpense, budgetCategories }) => {
         error={errors.budgetCategory}
         helperText={errors.budgetCategory ? "Budget Category is required" : ""}
       >
-        {budgetCategories.map((category) => (
-          <MenuItem key={category} value={category}>
-            {category}
+        {budget.map((item) => (
+          <MenuItem key={item.id} value={item.id}>
+            {item.budgetName}
           </MenuItem>
         ))}
       </TextField>
