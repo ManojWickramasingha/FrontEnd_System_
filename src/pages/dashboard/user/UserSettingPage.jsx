@@ -12,7 +12,11 @@ import axiosInstance from "../../../utils/axiosInstance";
 import { ADD_USER_IMAGE } from '../../../utils/globalConfig';
 
 const UserSettingPage = () => {
-    const { user, updateFirstNameLastName, updateUserName } = useAuth();
+    const { user, updateFirstNameLastName, updateUserName, updateUserEmail } = useAuth();
+    const [loadingFirstNameLastName, setLoadingFirstNameLastName] = useState(false);
+    const [loadingUserName, setLoadingUserName] = useState(false);
+    const [loadingUserEmail, setLoadingUserEmail] = useState(false);
+    const [loadingHandleFile, setLoadingHandleFile] = useState(false);
     const [loading, setLoading] = useState(false);
 
     // ----
@@ -27,6 +31,12 @@ const UserSettingPage = () => {
     const updateUserName_ = Yup.object().shape({
         userName: Yup.string()
             .required('User Name is required'),
+    });
+
+    // ----
+    const updateUserEmail_ = Yup.object().shape({
+        userEmail: Yup.string()
+            .required('User Email is required'),
     });
 
     // ----
@@ -57,14 +67,26 @@ const UserSettingPage = () => {
     });
 
     // ----
+    const {
+        control: controlUserEmail,
+        handleSubmit: handleSubmitUserEmail,
+        formState: { errors: errorsUserEmail },
+        reset: resetUserEmail
+    } = useForm({
+        resolver: yupResolver(updateUserEmail_),
+        defaultValues: {
+            userEmail: ''
+        }
+    });
+
+    // ----
     const onSubmitUpdateFirstNameLastName = async (submittedData) => {
         try {
-            setLoading(true);
+            setLoadingFirstNameLastName(true);
             await updateFirstNameLastName(user.userName, submittedData.firstName, submittedData.lastName);
-            // console.log(response);
-            setLoading(false);
+            setLoadingFirstNameLastName(false);
         } catch (error) {
-            setLoading(false);
+            setLoadingFirstNameLastName(false);
             resetFirstNameLastName()
             toast.error('An Error occurred. Please contact admin');
         }
@@ -73,13 +95,41 @@ const UserSettingPage = () => {
     // ----
     const onSubmitUpdateUserName = async (submittedData) => {
         try {
-            setLoading(true);
+            setLoadingUserName(true);
             await updateUserName(user.userName, submittedData.userName);
-            setLoading(false);
+            setLoadingUserName(false);
         } catch (error) {
-            setLoading(false);
+            setLoadingUserName(false);
             resetUserName();
             toast.error('An Error occured. Please contact admin');
+        }
+    };
+
+    // email validation
+    function isValidEmail(email) {
+        const pattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+        return pattern.test(email);
+    }
+
+    // ----
+    const onSubmitUpdateUserEmail = async(submitedData) => {
+        if(!submitedData.userEmail){
+            toast.error('Please enter your email');
+            return;
+        }
+
+        if(!isValidEmail(submitedData.userEmail)){
+            toast.error('Please enter valid email');
+            return;
+        }
+
+        try{
+            setLoadingUserEmail(true);
+            await updateUserEmail(submitedData.userEmail);
+            setLoadingUserEmail(false);
+        } catch(error){
+            setLoadingUserEmail(false);
+            toast.error('An error occurred. Please contact admin');
         }
     };
 
@@ -94,20 +144,18 @@ const UserSettingPage = () => {
         formData.append('ImageFile', event.target.files[0]); // selectedFile should be the file object
 
         try {
-            setLoading(true);
+            setLoadingHandleFile(true);
             await axiosInstance.post(ADD_USER_IMAGE, formData);
-            setLoading(false);
+            setLoadingHandleFile(false);
             toast.success('user image added sucessfully');
         } catch (error) {
-            setLoading(false);
+            setLoadingHandleFile(false);
             toast.error('An error occurred. Please contact admin');
-        } finally {
-            setImageFile(null);
         }
     };
 
     // ----
-    if (loading) {
+    if (loadingHandleFile) {
         return <div className="w-full">
             <Spinner />
         </div>
@@ -140,7 +188,7 @@ const UserSettingPage = () => {
                             <InputField control={controlFirstNameLastName} label={'Last Name'} inputName={'lastName'} error={errorsFirstNameLastName.lastName?.message} />
                             <div className="flex flex-row justify-center items-center gap-3 my-3">
                                 <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetFirstNameLastName()} />
-                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loading} />
+                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingFirstNameLastName} />
                             </div>
                         </form>
                         <form onSubmit={handleSubmitUserName(onSubmitUpdateUserName)}>
@@ -148,7 +196,15 @@ const UserSettingPage = () => {
                             <InputField control={controlUserName} label={'User Name'} inputName={'userName'} error={errorsUserName.userName?.message} />
                             <div className="flex flex-row justify-center items-center gap-3 my-3">
                                 <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetUserName()} />
-                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loading} />
+                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingUserName} />
+                            </div>
+                        </form>
+                        <form onSubmit={handleSubmitUserEmail(onSubmitUpdateUserEmail)}>
+                            {/* given diferent inputName for separately working */}
+                            <InputField control={controlUserEmail} label={'User Email'} inputName={'userEmail'} error={errorsUserEmail.userEmail?.message} />
+                            <div className="flex flex-row justify-center items-center gap-3 my-3">
+                                <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetUserEmail()} />
+                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingUserEmail} />
                             </div>
                         </form>
                     </div>
@@ -159,3 +215,32 @@ const UserSettingPage = () => {
 }
 
 export default UserSettingPage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from 'react'
+// import Setting from '../../../components/SettingComponenets/Setting'
+
+// const UserSettingPage = () => {
+//     return (
+//         <div className='pageTemplate2'>
+//             <h1 className='text-3xl font-bold'>Setting</h1>
+//             <Setting />
+//         </div>
+//     )
+// }
+
+// export default UserSettingPage

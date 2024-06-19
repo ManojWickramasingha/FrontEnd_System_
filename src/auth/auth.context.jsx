@@ -22,7 +22,8 @@ import {
     PATH_AFTER_LOGOUT,
     REGISTER_URL,
     UPDATE_FIRSTNAME_LASTNAME,
-    UPDATE_USERNAME
+    UPDATE_USERNAME,
+    UPDATE_USEREMAIL
 } from '../utils/globalConfig';
 
 // We need a reducer function for useReducer hook
@@ -52,6 +53,14 @@ const authReducer = (state,action) => {
         }
     }
     if(action.type == 'UpdateUserName'){
+        return {
+            ...state,
+            isAuthenticated: true,
+            isAuthLoading: false,
+            user: action.payload
+        }
+    }
+    if(action.type == 'UpdateUserEmail'){
         return {
             ...state,
             isAuthenticated: true,
@@ -92,7 +101,7 @@ const AuthContextProvider = ({ children }) => {
                 dispatch({
                     type: 'LOGIN',
                     payload: userInfo,
-                })
+                });
             } else {
                 setSession(null);
                 dispatch({
@@ -194,6 +203,22 @@ const AuthContextProvider = ({ children }) => {
         });
     },[]);
 
+    // updateUserEmail method
+    const updateUserEmail = useCallback(async(userEmail) => {
+        console.log(userEmail);
+        const response = await axiosInstance.put(UPDATE_USEREMAIL, {
+            userEmail
+        });
+        toast.success('User Email successfully upated');
+
+        const { userInfo } = response.data;
+        console.log(response);
+        dispatch({
+            type: 'UpdateUserEmail',
+            payload: userInfo
+        });
+    });
+
     // We create an object for values of context provider
     // This will keep our codes more readable
     const valuesObject = {
@@ -204,7 +229,8 @@ const AuthContextProvider = ({ children }) => {
         login,
         logout,
         updateFirstNameLastName,
-        updateUserName
+        updateUserName,
+        updateUserEmail
     };
 
     return ( <AuthContext.Provider value={valuesObject}>{children}</AuthContext.Provider> )

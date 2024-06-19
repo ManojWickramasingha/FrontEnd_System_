@@ -15,6 +15,7 @@ export const MY_LOGS_URL = 'https://localhost:7026/api/Log/mine';
 export const UPDATE_FIRSTNAME_LASTNAME = 'https://localhost:7026/updateFirstLatName';
 export const UPDATE_USERNAME = 'https://localhost:7026/updateUserName';
 export const ADD_USER_IMAGE = 'https://localhost:7026/api/UserImage/AddUserImage';
+export const UPDATE_USEREMAIL = 'https://localhost:7026/updateUserEmail?Email=abc%40gmail.com';
 
 // Auth Routes
 export const PATH_AFTER_REGISTER = PATH_PUBLIC.login;
