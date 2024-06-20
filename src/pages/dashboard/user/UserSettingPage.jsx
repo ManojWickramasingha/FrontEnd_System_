@@ -36,7 +36,8 @@ const UserSettingPage = () => {
     // ----
     const updateUserEmail_ = Yup.object().shape({
         userEmail: Yup.string()
-            .required('User Email is required'),
+            .required('User Email is required')
+            .email('Input text must be a valid email'),
     });
 
     // ----
@@ -106,22 +107,22 @@ const UserSettingPage = () => {
     };
 
     // email validation
-    function isValidEmail(email) {
-        const pattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-        return pattern.test(email);
-    }
+    // function isValidEmail(email) {
+    //     const pattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    //     return pattern.test(email);
+    // }
 
     // ----
     const onSubmitUpdateUserEmail = async(submitedData) => {
-        if(!submitedData.userEmail){
-            toast.error('Please enter your email');
-            return;
-        }
+        // if(!submitedData.userEmail){
+        //     toast.error('Please enter your email');
+        //     return;
+        // }
 
-        if(!isValidEmail(submitedData.userEmail)){
-            toast.error('Please enter valid email');
-            return;
-        }
+        // if(!isValidEmail(submitedData.userEmail)){
+        //     toast.error('Please enter valid email');
+        //     return;
+        // }
 
         try{
             setLoadingUserEmail(true);
@@ -193,7 +194,8 @@ const UserSettingPage = () => {
                         </form>
                         <form onSubmit={handleSubmitUserName(onSubmitUpdateUserName)}>
                             {/* given diferent inputName for separately working */}
-                            <InputField control={controlUserName} label={'User Name'} inputName={'userName'} error={errorsUserName.userName?.message} />
+                            <InputField control={controlUserName} label={'User Name(Old)'} inputName={'userName'} error={errorsUserName.userName?.message} />
+                            <InputField control={controlUserName} label={'User Name(New)'} inputName={'userName'} error={errorsUserName.userName?.message} />
                             <div className="flex flex-row justify-center items-center gap-3 my-3">
                                 <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetUserName()} />
                                 <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingUserName} />
@@ -202,6 +204,31 @@ const UserSettingPage = () => {
                         <form onSubmit={handleSubmitUserEmail(onSubmitUpdateUserEmail)}>
                             {/* given diferent inputName for separately working */}
                             <InputField control={controlUserEmail} label={'User Email'} inputName={'userEmail'} error={errorsUserEmail.userEmail?.message} />
+                            <div className="flex flex-row justify-center items-center gap-3 my-3">
+                                <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetUserEmail()} />
+                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingUserEmail} />
+                            </div>
+                        </form>
+                        <form onSubmit={handleSubmitUserEmail(onSubmitUpdateUserEmail)}>
+                            {/* given diferent inputName for separately working */}
+                            <InputField control={controlUserEmail} label={'Password(Old)'} inputName={'userEmail'} error={errorsUserEmail.userEmail?.message} />
+                            <InputField control={controlUserEmail} label={'Password(New)'} inputName={'userEmail'} error={errorsUserEmail.userEmail?.message} />
+                            <div className="flex flex-row justify-center items-center gap-3 my-3">
+                                <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetUserEmail()} />
+                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingUserEmail} />
+                            </div>
+                        </form>
+                        <form onSubmit={handleSubmitUserEmail(onSubmitUpdateUserEmail)}>
+                            {/* given diferent inputName for separately working */}
+                            <InputField control={controlUserEmail} label={'Phone Number'} inputName={'userEmail'} error={errorsUserEmail.userEmail?.message} />
+                            <div className="flex flex-row justify-center items-center gap-3 my-3">
+                                <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetUserEmail()} />
+                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingUserEmail} />
+                            </div>
+                        </form>
+                        <form onSubmit={handleSubmitUserEmail(onSubmitUpdateUserEmail)}>
+                            {/* given diferent inputName for separately working */}
+                            <InputField control={controlUserEmail} label={'Address'} inputName={'userEmail'} error={errorsUserEmail.userEmail?.message} />
                             <div className="flex flex-row justify-center items-center gap-3 my-3">
                                 <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetUserEmail()} />
                                 <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingUserEmail} />
