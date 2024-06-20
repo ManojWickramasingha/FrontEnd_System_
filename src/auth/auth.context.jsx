@@ -125,14 +125,15 @@ const AuthContextProvider = ({ children }) => {
     },[]);
 
     // Register Method
-    const register = useCallback(async (firstName,lastName,userName,email,password,address) => {
+    const register = useCallback(async (firstName,lastName,userName,email,phoneNumber,password,confirmPassword) => {
         const response = await axiosInstance.post(REGISTER_URL, {                                                                    
             firstName,
             lastName,
             userName,
             email,
+            phoneNumber,
             password,
-            address,
+            confirmPassword,
         });
         console.log('Register Result:', response);
         toast.success('Register Was Successfull. Please Login.');

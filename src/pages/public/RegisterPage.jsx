@@ -21,10 +21,15 @@ const RegisterPage = () => {
         email: Yup.string()
             .required('Email is required')
             .email('Input text must be a valid email'),
+        phoneNumber : Yup.string()
+            .required('Phone Number is required')
+            .matches(/^[0-9]{3}[0-9]{3}[0-9]{4}$/, 'Phone number must be in the format: 1234567890'),
         password: Yup.string()
             .required('Password is required')
             .min(8,'Password must be at least 8 characters'),
-        address: Yup.string().required('Address is required'),
+        confirmPassword: Yup.string()
+            .required('Confirm Password is required')
+            .oneOf([Yup.ref('password'), null], 'Passwords must match')
     });
 
     const {
@@ -39,17 +44,23 @@ const RegisterPage = () => {
             lastName: '',
             userName: '',
             email: '',
+            phoneNumber: '',
             password: '',
-            address: '',
+            confirmPassword: '',
         },
     });
 
     // with backend
     const onSubmitRegisterForm = async (data) => {
+        // if(data.password != data.confirmPassword){
+        //     toast.error('Passwords must match');
+        //     return;
+        // }
+
         try {
             // let userRole = 'USER';
             setLoading(true);
-            await register(data.firstName,data.lastName,data.userName,data.email,data.password,data.address);                                                    
+            await register(data.firstName,data.lastName,data.userName,data.email,data.phoneNumber,data.password,data.confirmPassword);                                                    
             setLoading(false);
         } catch(error) {
             setLoading(false);
@@ -89,8 +100,9 @@ const RegisterPage = () => {
                 <InputField control={control} label='Last Name' inputName='lastName' error={errors.lastName?.message} />
                 <InputField control={control} label='User Name' inputName='userName' error={errors.userName?.message} />
                 <InputField control={control} label='Email' inputName='email' error={errors.email?.message} />
+                <InputField control={control} label='Phone Number' inputName='phoneNumber' inputType='tel' error={errors.phoneNumber?.message} />
                 <InputField control={control} label='Password' inputName='password' inputType='password' error={errors.password?.message} />
-                <InputField control={control} label='Address' inputName='address' error={errors.address?.message} />
+                <InputField control={control} label='Confirm Password' inputName='confirmPassword' inputType='password' error={errors.confirmPassword?.message} />
 
                 <div className='px-4 mt-2 mb-6 w-9/12 flex gap-2'>
                     <h1>Already Have an account?</h1>
