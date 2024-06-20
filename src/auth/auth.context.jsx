@@ -204,15 +204,14 @@ const AuthContextProvider = ({ children }) => {
     },[]);
 
     // updateUserEmail method
-    const updateUserEmail = useCallback(async(userEmail) => {
-        console.log(userEmail);
+    const updateUserEmail = useCallback(async(email) => {
+        // Must care -> send structure === receive structire
         const response = await axiosInstance.put(UPDATE_USEREMAIL, {
-            userEmail
+            email
         });
         toast.success('User Email successfully upated');
 
         const { userInfo } = response.data;
-        console.log(response);
         dispatch({
             type: 'UpdateUserEmail',
             payload: userInfo
