@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Grid, Typography, Dialog, DialogActions, Button } from '@mui/material';
 import BudgetForm from './BudgetForm';
 import ExpenseForm from './ExpenseForm';
 import BudgetCard from './BudgetCard';
 import BudgetDetails from './BudgetDetails';
+import axios from 'axios';
 
 const BudgetDashboard = () => {
   const [budgets, setBudgets] = useState([]);
   const [selectedBudget, setSelectedBudget] = useState(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [mybudget,setmybudget]=useState([])
 
   const handleCreateBudget = (newBudget) => {
     setBudgets([...budgets, { ...newBudget, expenses: [] }]);
@@ -48,24 +50,37 @@ const BudgetDashboard = () => {
   const handleCloseDeleteDialog = () => {
     setIsDeleteDialogOpen(false);
   };
+  
+  const getall=async() =>{
+    try{
+    const response= await axios.get("https://localhost:7026/api/Budgets?username=ashen")
+    console.log(response.data);
+    setmybudget(response.data);
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+
+useEffect(() => {getall()}, []);
 
   return (
     <Container>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
-          <BudgetForm onCreateBudget={handleCreateBudget} />
+          <BudgetForm getall={getall} onCreateBudget={handleCreateBudget} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <ExpenseForm onAddExpense={handleAddExpense} budgetCategories={budgets.map(b => b.budgetName)} />
+          <ExpenseForm getall={getall} budget={mybudget} onAddExpense={handleAddExpense} budgetCategories={budgets.map(b => b.budgetName)} />
         </Grid>
       </Grid>
 
       <Typography variant="h4" gutterBottom>
         Existing Budgets
       </Typography>
-
+      
       <Grid container spacing={3}>
-        {budgets.map((budget, index) => (
+        {mybudget.map((budget, index) => (
           <Grid item xs={12} md={6} key={index}>
             <BudgetCard 
               budget={budget} 

@@ -15,7 +15,7 @@ const ReminderDetail = ({ event, open, setOpen, onDelete, events, setEvents, set
   };
   const handleDelete = () => {
    
-    axios.delete(`http://localhost:5296/api/Reminders/`+`${event.id}`)
+    axios.delete(`https://localhost:7026/api/Reminders/`+`${event.id}`)
 
   .then(response => {
     console.log("response")

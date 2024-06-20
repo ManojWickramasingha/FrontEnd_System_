@@ -42,11 +42,13 @@ const MyCalendar = () => {
     setEvents(prevEvents => [...prevEvents, newEvent]);
     setOpenSet(false);
   };
+
+  
   useEffect(() => {
     document.body.style.margin = "0";
     axios
       .get(
-        "http://localhost:5296/api/Reminders",
+        "https://localhost:7026/api/Reminders",
       ).then((response) => {
         const data = response.data;
         console.log(data);

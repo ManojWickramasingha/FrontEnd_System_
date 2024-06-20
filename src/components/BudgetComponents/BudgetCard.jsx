@@ -10,22 +10,23 @@ const BudgetCardContainer = styled(Card)(({ theme }) => ({
 }));
 
 const BudgetCard = ({ budget, onViewDetails, onDelete }) => {
-  const spent = budget.expenses.reduce((total, expense) => total + expense.amount, 0);
-  const remaining = budget.amount - spent;
+
+  // const spent = budget.expenses.reduce((total, expense) => total + expense.amount, 0);
+  // const remaining = budget.amount - spent;
 
   return (
-    <BudgetCardContainer>
+    <BudgetCardContainer sx={budget.remain < 0 && {border: '5px solid red'}}>
       <CardContent>
         <Typography variant="h6" color="textSecondary">
           {budget.budgetName}
         </Typography>
         <Typography variant="h5" component="div">
-          ${budget.amount.toFixed(2)} Budgeted
+          ${budget.budgetAmount.toFixed(2)} Budgeted
         </Typography>
-        <LinearProgress variant="determinate" value={(spent / budget.amount) * 100} />
+        <LinearProgress variant="determinate" value={(1000 / budget.amount) * 100} />
         <Box display="flex" justifyContent="space-between" mt={1}>
-          <Typography color="textSecondary">${spent.toFixed(2)} spent</Typography>
-          <Typography color="textSecondary">${remaining.toFixed(2)} remaining</Typography>
+          <Typography color="textSecondary">${budget.spent} spent</Typography>
+          <Typography color="textSecondary">${budget.remain} remaining</Typography>
         </Box>
         <Box display="flex" justifyContent="space-between" mt={2}>
           <Button 

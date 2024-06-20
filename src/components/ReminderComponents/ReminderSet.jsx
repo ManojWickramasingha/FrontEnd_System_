@@ -51,7 +51,7 @@ const ReminderSet = ({ open, setOpen, rdate, addEvent, setCount, setOpenSet }) =
     };
     try {
       var response = await axios.post(
-        "http://localhost:5296/api/Reminders",
+        "https://localhost:7026/api/Reminders",
         tempEvent
       );
       handleClose();
