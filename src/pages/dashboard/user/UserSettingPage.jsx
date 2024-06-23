@@ -16,10 +16,12 @@ const UserSettingPage = () => {
     const [loadingFirstNameLastName, setLoadingFirstNameLastName] = useState(false);
     const [loadingUserName, setLoadingUserName] = useState(false);
     const [loadingUserEmail, setLoadingUserEmail] = useState(false);
+    const [loadingUserPassword, setLoadingUserPassword] = useState(false);
+    const [loadingUserPhoneNumber, setLoadingUserPhoneNumber] = useState(false);
     const [loadingHandleFile, setLoadingHandleFile] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    // ----
+    // userFirstNameLastName form validation... 
     const updateFirstNameLastName_ = Yup.object().shape({
         firstName: Yup.string()
             .required('First Name is required'),
@@ -27,25 +29,50 @@ const UserSettingPage = () => {
             .required('Last Name is reqiured'),
     });
 
-    // ----
+    // userName form validation...
     const updateUserName_ = Yup.object().shape({
-        userName: Yup.string()
-            .required('User Name is required'),
+        userNameOld: Yup.string()
+            .required('Old User Name is required')
+            .test('is-same', 'Your Old User Name is invalid', function(value) {
+                return value === user.userName;
+            }),
+        userNameNew: Yup.string()
+            .required('New User Name is required'),
     });
 
-    // ----
+    // userEmail form validation...
     const updateUserEmail_ = Yup.object().shape({
         userEmail: Yup.string()
             .required('User Email is required')
             .email('Input text must be a valid email'),
     });
 
-    // ----
+    // userPassword form validation...
+    const updateUserPassword_ = Yup.object().shape({
+        userPasswordOld: Yup.string()
+            .required('Old User Password is required')
+            .min(8, 'Password must be at least 8 characters'),
+        userPasswordNew: Yup.string()
+            .required('New User Password is required')
+            .min(8, 'Password must be at least 8 characters'),
+    });
+
+    // userPhoneNumber form validation...
+    const updateUserPhoneNumber_ = Yup.object().shape({
+        userPhoneNumber: Yup.string()
+            .required('User Phone Number is required')
+            .matches(/^[0-9]{3}[0-9]{3}[0-9]{4}$/, 'Phone number must be in the format: 1234567890'),
+    });
+    
+
+
+
+    // userFirstNameLastName form setup...
     const {
-        control: controlFirstNameLastName,
-        handleSubmit: handleSubmitFirstNameLastName,
-        formState: { errors: errorsFirstNameLastName },
-        reset: resetFirstNameLastName
+        control: controlFirstNameLastName,                  // An object -> register input -> form...
+        handleSubmit: handleSubmitFirstNameLastName,        // A function -> handel the form submition...
+        formState: { errors: errorsFirstNameLastName },     //  An object -> contain the validation errors...
+        reset: resetFirstNameLastName                       // reset the form values...
     } = useForm({
         resolver: yupResolver(updateFirstNameLastName_),
         defaultValues: {
@@ -54,7 +81,7 @@ const UserSettingPage = () => {
         }
     });
 
-    // ----
+    // userName form setup...
     const {
         control: controlUserName,
         handleSubmit: handleSubmitUserName,
@@ -63,11 +90,12 @@ const UserSettingPage = () => {
     } = useForm({
         resolver: yupResolver(updateUserName_),
         defaultValues: {
-            userName: ''
+            userNameOld: '',
+            userNameNew: '',
         }
     });
 
-    // ----
+    // userEmail form setup...
     const {
         control: controlUserEmail,
         handleSubmit: handleSubmitUserEmail,
@@ -80,7 +108,36 @@ const UserSettingPage = () => {
         }
     });
 
-    // ----
+    // userPassword form setup...
+    const {
+        control: controlUserPassword,
+        handleSubmit: handleSubmitUserPassword,
+        formState: { errors: errorsUserPassword },
+        reset: restetUserPassword
+    } = useForm({
+        resolver: yupResolver(updateUserPassword_),
+        defaultValues: {
+            userPasswordOld: '',
+            userPasswordNew: '',
+        }
+    });
+
+    // userPhoneNumber form setup...
+    const {
+        control: controlUserPhoneNumber,
+        handleSubmit: handleSubmitUserPhoneNumber,
+        formState: { errors : errorsUserPhoneNumber },
+        reset: resetUserPhoneNumber
+    } = useForm({
+        resolver: yupResolver(updateUserPhoneNumber_),
+        defaultValues: {
+            userPhoneNumber: '',
+        }
+    });
+
+
+
+    // API endpoint calling...
     const onSubmitUpdateFirstNameLastName = async (submittedData) => {
         try {
             setLoadingFirstNameLastName(true);
@@ -93,11 +150,11 @@ const UserSettingPage = () => {
         }
     };
 
-    // ----
+    // API endpoint calling...
     const onSubmitUpdateUserName = async (submittedData) => {
         try {
             setLoadingUserName(true);
-            await updateUserName(user.userName, submittedData.userName);
+            await updateUserName(submittedData.userNameOld, submittedData.userNameNew);
             setLoadingUserName(false);
         } catch (error) {
             setLoadingUserName(false);
@@ -112,7 +169,7 @@ const UserSettingPage = () => {
     //     return pattern.test(email);
     // }
 
-    // ----
+    // API endpoint calling...
     const onSubmitUpdateUserEmail = async(submitedData) => {
         // if(!submitedData.userEmail){
         //     toast.error('Please enter your email');
@@ -134,7 +191,18 @@ const UserSettingPage = () => {
         }
     };
 
-    //-----
+
+    // API endpoint calling...
+    const onSubmitUpdateUserPassword = () => {
+
+    }
+
+    // API endpoint calling...
+    const onSubmitUpdateUserPhoneNumber = () => {
+
+    }
+
+    // API endpoint calling...
     const handleFileChange = async(event) => {
         if (!event.target.files[0]) {
             toast.error('please select an image');
@@ -194,8 +262,8 @@ const UserSettingPage = () => {
                         </form>
                         <form onSubmit={handleSubmitUserName(onSubmitUpdateUserName)}>
                             {/* given diferent inputName for separately working */}
-                            <InputField control={controlUserName} label={'User Name(Old)'} inputName={'userName'} error={errorsUserName.userName?.message} />
-                            <InputField control={controlUserName} label={'User Name(New)'} inputName={'userName'} error={errorsUserName.userName?.message} />
+                            <InputField control={controlUserName} label={'User Name(Old)'} inputName={'userNameOld'} error={errorsUserName.userNameOld?.message} />
+                            <InputField control={controlUserName} label={'User Name(New)'} inputName={'userNameNew'} error={errorsUserName.userNameNew?.message} />
                             <div className="flex flex-row justify-center items-center gap-3 my-3">
                                 <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetUserName()} />
                                 <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingUserName} />
@@ -209,29 +277,21 @@ const UserSettingPage = () => {
                                 <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingUserEmail} />
                             </div>
                         </form>
-                        <form onSubmit={handleSubmitUserEmail(onSubmitUpdateUserEmail)}>
+                        <form onSubmit={handleSubmitUserPassword(onSubmitUpdateUserPassword)}>
                             {/* given diferent inputName for separately working */}
-                            <InputField control={controlUserEmail} label={'Password(Old)'} inputName={'userEmail'} error={errorsUserEmail.userEmail?.message} />
-                            <InputField control={controlUserEmail} label={'Password(New)'} inputName={'userEmail'} error={errorsUserEmail.userEmail?.message} />
+                            <InputField control={controlUserPassword} label={'Password(Old)'} inputName={'userPasswordOld'} error={errorsUserPassword.userPasswordOld?.message} />
+                            <InputField control={controlUserPassword} label={'Password(New)'} inputName={'userPasswordNew'} error={errorsUserPassword.userPasswordNew?.message} />
                             <div className="flex flex-row justify-center items-center gap-3 my-3">
-                                <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetUserEmail()} />
-                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingUserEmail} />
+                                <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => restetUserPassword()} />
+                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingUserPassword} />
                             </div>
                         </form>
-                        <form onSubmit={handleSubmitUserEmail(onSubmitUpdateUserEmail)}>
+                        <form onSubmit={handleSubmitUserPhoneNumber(onSubmitUpdateUserPhoneNumber)}>
                             {/* given diferent inputName for separately working */}
-                            <InputField control={controlUserEmail} label={'Phone Number'} inputName={'userEmail'} error={errorsUserEmail.userEmail?.message} />
+                            <InputField control={controlUserPhoneNumber} label={'Phone Number'} inputName={'userPhoneNumber'} error={errorsUserPhoneNumber.userPhoneNumber?.message} />
                             <div className="flex flex-row justify-center items-center gap-3 my-3">
-                                <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetUserEmail()} />
-                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingUserEmail} />
-                            </div>
-                        </form>
-                        <form onSubmit={handleSubmitUserEmail(onSubmitUpdateUserEmail)}>
-                            {/* given diferent inputName for separately working */}
-                            <InputField control={controlUserEmail} label={'Address'} inputName={'userEmail'} error={errorsUserEmail.userEmail?.message} />
-                            <div className="flex flex-row justify-center items-center gap-3 my-3">
-                                <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetUserEmail()} />
-                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingUserEmail} />
+                                <Button variant={'secondary'} type={'button'} label={'Discard'} onClick={() => resetUserPhoneNumber()} />
+                                <Button variant={'primary'} type={'submit'} label={'Update'} onClick={() => { }} loading={loadingUserPhoneNumber} />
                             </div>
                         </form>
                     </div>
