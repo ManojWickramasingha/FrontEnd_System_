@@ -30,5 +30,6 @@ export const PATH_DASHBOARD_ADMIN = {
     inbox: '/admin/dashboard/inbox',
     myLogs: '/admin/dashboard/my-logs',
     remender: '/admin/dashboard/remender',
-    setting: '/admin/dashboard/setting'
+    setting: '/admin/dashboard/setting',
+    outMessages: '/admin/dashboard/out-all-messages'
 }
