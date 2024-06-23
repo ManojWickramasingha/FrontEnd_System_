@@ -217,7 +217,7 @@ const AuthContextProvider = ({ children }) => {
             type: 'UpdateUserEmail',
             payload: userInfo
         });
-    });
+    },[]);
 
     // We create an object for values of context provider
     // This will keep our codes more readable

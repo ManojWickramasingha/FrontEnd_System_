@@ -24,10 +24,14 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { CREATE_OUT_MESSAGES_URL } from '../../utils/globalConfig'
+import axiosInstance from '../../utils/axiosInstance'
+import toast from 'react-hot-toast'
+
 const HomePage = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [contactLoading, setContactLoading] = useState(false);
-    const [response, setResponse] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
 
     const prevIndex = () => {
         const nextIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
@@ -56,27 +60,49 @@ const HomePage = () => {
     const {
         control: contactControl,
         handleSubmit: handleSubmitContact,
-        formState: { errors : errorsContact },
+        formState: { errors: errorsContact },
         reset: resetContact
     } = useForm({
         resolver: yupResolver(contactFrom),
         defaultValues: {
             contactEmail: '',
-            cotactMessage: ''
+            contactMessage: ''
         }
     });
 
     // set response
     const onChangeResponse = (event) => {
         const isChecked = event.target.checked;
-        setResponse(isChecked);
+        setIsChecked(isChecked);
     };
 
 
     // API calling
-    const onSubmitContactForm = () => {
+    const onSubmitContactForm = async (submitedData) => {
+        const email = submitedData.contactEmail;
+        const text = submitedData.contactMessage;
 
-    }
+        try {
+            setContactLoading(true);
+            await axiosInstance.post(CREATE_OUT_MESSAGES_URL, {
+                email,
+                text,
+                isChecked
+            });
+            toast.success("Send message successfully");
+            setContactLoading(false);
+            resetContact()
+        } catch(error){
+            setContactLoading(false);
+            const { status, data } = error;
+            if(status == 400){
+                toast.error(data);
+            }
+            else{
+                toast.error("An error occured.please contact admin");
+            }
+        }
+    };
 
 
     return (
@@ -181,10 +207,10 @@ const HomePage = () => {
                 <div className='w-full flex justify-center items-center'>
                     <form onSubmit={handleSubmitContact(onSubmitContactForm)} className='w-1/2'>
                         {/* <!-- Email input --> */}
-                        <InputField control={contactControl} label={"Email"} inputName={"contactEmail"} inputType={"email"} error={errorsContact.contactEmail?.message}  />
+                        <InputField control={contactControl} label={"Email"} inputName={"contactEmail"} inputType={"email"} error={errorsContact.contactEmail?.message} />
 
                         {/* <!-- Message input --> */}
-                        <InputField control={contactControl} label={"Message"} inputName={"cotactMessage"} error={errorsContact.contactMessage?.message} isTextarea={true} />
+                        <InputField control={contactControl} label={"Message"} inputName={"contactMessage"} error={errorsContact.contactMessage?.message} isTextarea={true} />
 
                         {/* <!-- Checkbox --> */}
                         <div className="flex items-center justify-start px-12">
@@ -203,7 +229,7 @@ const HomePage = () => {
                         {/* <!-- Submit button --> */}
                         <div className='w-full flex justify-end items-center gap-3 px-12'>
                             <Button variant={"secondary"} type={"button"} label={"Discard"} onClick={() => resetContact()} />
-                            <Button variant={"primary"} type={"submit"} label={"Submit"} onClick={() => {}} loading={contactLoading} />
+                            <Button variant={"primary"} type={"submit"} label={"Submit"} onClick={() => { }} loading={contactLoading} />
                         </div>
                     </form>
                 </div>
