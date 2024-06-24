@@ -100,7 +100,7 @@ const Transaction = () => {
     }, []);
 
     return (
-        <div className='pageTemplate2'>
+        <div className=''>
             <div className='bg-white-200 '>
                 <h1 className='text-6xl font-bold text-center pt-6 text-green-500'>Transaction</h1>
                 <div className='container mt-10 mt-auto px-5'>
