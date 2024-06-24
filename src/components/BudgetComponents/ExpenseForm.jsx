@@ -18,15 +18,16 @@ const ExpenseForm = ({ onAddExpense, budgetCategories,budget,getall }) => {
   const [errors, setErrors] = useState({ expenseName: false, amount: false, budgetCategory: false });
 
   const handleAddExpense = async() => {
-    if (expenseName === "" || amount === "" || budgetCategory === "") {
+    if (expenseName === "" || amount <= 0 || budgetCategory === "") {
       setErrors({
         expenseName: expenseName === "",
-        amount: amount === "",
+        amount: amount <= 0 ,
         budgetCategory: budgetCategory === "",
       });
     } else {
       try {
         var response = await axios.post("https://localhost:7026/api/BExpenses",{
+          expenseId:0,
           bExpenseName: expenseName,
           bExpenseAmount: amount,
           budgetId: budgetCategory,
@@ -36,7 +37,7 @@ const ExpenseForm = ({ onAddExpense, budgetCategories,budget,getall }) => {
         setAmount(0);
         setBudgetCategory(0);
         getall();
-        toast.success("Reminder Set successfully");
+        toast.success("Expense Added successfully");
       } catch (err) {
         console.log(err);
         toast.error("An Error occurred.");
@@ -46,7 +47,6 @@ const ExpenseForm = ({ onAddExpense, budgetCategories,budget,getall }) => {
 
   return (
     <FormContainer>
-      {budgetCategory}
       <Typography variant="h6">Add New Expense</Typography>
       <TextField
         label="Expense Name"

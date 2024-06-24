@@ -22,10 +22,10 @@ const BudgetForm = ({ onCreateBudget,getall }) => {
   });
 
   const handleCreateBudget = async () => {
-    if (budgetName === "" || amount === "" || description === "") {
+    if (budgetName === "" || amount <= 0   || description === "") {
       setErrors({
         budgetName: budgetName === "",
-        amount: amount === "",
+        amount: amount <=0 ,
         description: description === "",
       });
     } else {
@@ -34,14 +34,14 @@ const BudgetForm = ({ onCreateBudget,getall }) => {
           budgetName: budgetName,
           budgetAmount: amount,
           budgetDescription: description,
-          userName: "ashen",
+          userName: "c5a6ae0b-5fed-4c73-a003-7d8a9085966e",
         });
         setBudgetName("");
         setAmount(0);
         setDescription("");
         console.log(response);
         getall();
-        toast.success("Reminder Set successfully");
+        toast.success("Budget Set successfully");
       } catch (err) {
         console.log(err);
         toast.error("An Error occurred.");
