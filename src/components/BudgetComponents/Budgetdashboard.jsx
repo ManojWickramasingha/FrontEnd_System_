@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grid, Typography, Dialog, DialogActions, Button } from '@mui/material';
+import { Container, Grid, Typography, Dialog, DialogActions, Button, TextField } from '@mui/material';
 import BudgetForm from './BudgetForm';
 import ExpenseForm from './ExpenseForm';
 import BudgetCard from './BudgetCard';
 import BudgetDetails from './BudgetDetails';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 const BudgetDashboard = () => {
   const [budgets, setBudgets] = useState([]);
   const [selectedBudget, setSelectedBudget] = useState(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const [mybudget,setmybudget]=useState([])
+  const [mybudget, setMybudget] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleCreateBudget = (newBudget) => {
     setBudgets([...budgets, { ...newBudget, expenses: [] }]);
@@ -36,10 +38,26 @@ const BudgetDashboard = () => {
     setSelectedBudget(null);
   };
 
-  const handleDeleteBudget = () => {
-    setBudgets(budgets.filter(budget => budget !== selectedBudget));
-    setIsDeleteDialogOpen(false);
-    handleCloseDetails();
+  const handleDeleteBudget = async () => {
+    try {
+      await axios.delete(`https://localhost:7026/api/Budgets/${selectedBudget.id}`);
+      setBudgets(budgets.filter(budget => budget.budgetName !== selectedBudget.budgetName));
+      setIsDeleteDialogOpen(false);
+      handleCloseDetails();
+      // Fetch the updated list of budgets from the backend to refresh the view
+      getall();
+      toast.success('Budget deleted successfully');
+    } catch (error) {
+      console.error("Error deleting budget:", error);
+      toast.error('An error occurred while deleting the budget');
+    }
+  };
+  const handleUpdateBudget = (updatedBudget) => {
+    console.log("Updating budget in state:", updatedBudget);
+    setBudgets(budgets.map(budget => 
+      budget.id === updatedBudget.id ? updatedBudget : budget
+    ));
+
   };
 
   const handleOpenDeleteDialog = (budget) => {
@@ -50,19 +68,22 @@ const BudgetDashboard = () => {
   const handleCloseDeleteDialog = () => {
     setIsDeleteDialogOpen(false);
   };
-  
-  const getall=async() =>{
-    try{
-    const response= await axios.get("https://localhost:7026/api/Budgets?username=ashen")
-    console.log(response.data);
-    setmybudget(response.data);
-    }
-    catch(error){
-      console.log(error)
-    }
-  }
 
-useEffect(() => {getall()}, []);
+  const getall = async () => {
+    try {
+      const response = await axios.get("https://localhost:7026/api/Budgets?username=c5a6ae0b-5fed-4c73-a003-7d8a9085966e");
+      console.log(response.data);
+      setMybudget(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => { getall() }, []);
+
+  const filteredBudgets = mybudget.filter(budget => 
+    budget.budgetName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <Container>
@@ -78,9 +99,19 @@ useEffect(() => {getall()}, []);
       <Typography variant="h4" gutterBottom>
         Existing Budgets
       </Typography>
-      
+
+      <TextField
+        label="Search Budgets"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        sx={{color: '#07271F'}}
+      />
+
       <Grid container spacing={3}>
-        {mybudget.map((budget, index) => (
+        {filteredBudgets.map((budget, index) => (
           <Grid item xs={12} md={6} key={index}>
             <BudgetCard 
               budget={budget} 
@@ -97,6 +128,8 @@ useEffect(() => {getall()}, []);
             budget={selectedBudget} 
             onClose={handleCloseDetails} 
             onDelete={() => handleOpenDeleteDialog(selectedBudget)}
+            onUpdateBudget={handleUpdateBudget}
+            getall={getall}
           />
         )}
       </Dialog>
@@ -107,7 +140,7 @@ useEffect(() => {getall()}, []);
         </Typography>
         <DialogActions>
           <Button 
-          style={{ backgroundColor: '#f7f0f0', textTransform: 'none', fontSize: '16px', color: 'red'}}
+            style={{ backgroundColor: '#f7f0f0', textTransform: 'none', fontSize: '16px', color: 'red'}}
             variant="contained" 
             color="secondary" 
             onClick={handleDeleteBudget}
@@ -115,7 +148,7 @@ useEffect(() => {getall()}, []);
             Yes
           </Button>
           <Button 
-          style={{ backgroundColor: '#f7f0f0', textTransform: 'none', fontSize: '16px', color: '#07271F'}}
+            style={{ backgroundColor: '#f7f0f0', textTransform: 'none', fontSize: '16px', color: '#07271F'}}
             variant="contained" 
             onClick={handleCloseDeleteDialog}
           >
